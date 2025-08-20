@@ -5,11 +5,16 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-export const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <header className="w-full flex justify-center py-5 border-b border-b-light-grey-400">
-        <Image src="/logo-dnc.png" alt="Logo Escola DNC" width={45} height={40}/>
+        <Image
+          src="/logo-dnc.png"
+          alt="Logo Escola DNC"
+          width={45}
+          height={40}
+        />
       </header>
       <main className="w-full flex justify-center align-middle">
         {children}
@@ -20,3 +25,5 @@ export const Layout = ({ children }: LayoutProps) => {
     </>
   );
 };
+
+export default Layout;

@@ -1,10 +1,27 @@
-@import "tailwindcss/preflight";
 @import "tailwindcss";
-@tailwind utilities;
+
+@theme {
+  --color-snow-white: #ebebeb;
+  --color-main-brand-blue-100: #CCE6FE;
+  --color-main-brand-blue-200: #99CAFE;
+  --color-main-brand-blue-300: #66A9FC;
+  --color-main-brand-blue-400: #408CF9;
+  --color-main-brand-blue-500: #035DF5;
+  --color-main-brand-blue-600: #0247D2;
+  --color-main-brand-blue-700: #0135B0;
+  --color-ain-brand-blue-800: #00258E;
+  --color-main-brand-blue-900: #001A75;
+  --color-light-grey-400: #E7E4E4;
+  --color-light-grey-500: #bcbcbc;
+  --color-light-grey-800: #636363;
+  --color-main-brand-green-300: #1dbb9e;
+  --color-light-grey-300: #D9D9D9;
+  --color-light-grey-400: #E7E4E4;
+  --color-light-grey-500: #bcbcbc;
+  --color-light-grey-600: #ABABAB;
+}
 
 :root {
-  --bg-snow-white: #ebebeb;
-
   /* font variables */
   --black-color: #000000;
   --default-font-size: 16px;
@@ -17,14 +34,15 @@ html {
 body {
   height: 100vh;
   color: var(--black-color);
-  background-color: var(--bg-snow-white);
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: var(--default-font-size);
 }
 
-@layer utilites {
+
+@layer utilities {
   .text-balance {
     text-wrap: balance;
   }
