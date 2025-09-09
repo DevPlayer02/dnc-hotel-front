@@ -9,7 +9,7 @@
   --color-main-brand-blue-500: #035DF5;
   --color-main-brand-blue-600: #0247D2;
   --color-main-brand-blue-700: #0135B0;
-  --color-ain-brand-blue-800: #00258E;
+  --color-main-brand-blue-800: #00258E;
   --color-main-brand-blue-900: #001A75;
   --color-light-grey-400: #E7E4E4;
   --color-light-grey-500: #bcbcbc;
@@ -22,7 +22,6 @@
 }
 
 :root {
-  /* font variables */
   --black-color: #000000;
   --default-font-size: 16px;
 }

@@ -10,7 +10,7 @@ const Link = ({ className, ...props }: LinkProps) => {
   return (
     <NextLink
       {...props}
-      className={`text-main-brand-green-500 font-medium ${className}`}
+      className={`text-main-brand-blue-500 font-medium ${className}`}
     />
   );
 };
