@@ -1,9 +1,9 @@
-import Button from "./components/Button";
-import Link from "./components/Link";
-import TextField from "./components/Form/TextField";
-import ImageField from "./components/Form/ImageField";
-import Pagination from "./components/Pagination";
-import Alert from "./components/Alert";
+import Button from "../components/Button";
+import Link from "../components/Link";
+import TextField from "../components/Form/TextField";
+import ImageField from "../components/Form/ImageField";
+import Pagination from "../components/Pagination";
+import Alert from "../components/Alert";
 
 export default function Home() {
   return (
