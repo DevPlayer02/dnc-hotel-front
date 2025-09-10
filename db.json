@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Xoh Hackudo",
+      "email": "xohackudo@dnc.com",
+      "password": 12345,
+      "avatar": null
+    },
+    {
+      "id": 2,
+      "name": "void1000",
+      "email": "void1000@dnc.com",
+      "password": 12345,
+      "avatar": null
+    }
+  ]
+}
