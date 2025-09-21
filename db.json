@@ -4,15 +4,197 @@
       "id": 1,
       "name": "Xoh Hackudo",
       "email": "xohackudo@dnc.com",
-      "password": 12345,
+      "password": "12345",
       "avatar": null
     },
     {
       "id": 2,
       "name": "void1000",
       "email": "void1000@dnc.com",
-      "password": 12345,
+      "password": "12345",
       "avatar": null
+    }
+  ],
+  "hotels": [
+    {
+      "id": 1,
+      "name": "Hotel Sururu",
+      "description": "Hotel gostoso",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel1.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 2,
+      "name": "Hotel Narara",
+      "description": "Hotel top",
+      "address": "Rua da sacanagem, 321",
+      "image": null,
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 3,
+      "name": "Hotel Hohoho",
+      "description": "Hotel foda",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel3.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 4,
+      "name": "Hotel kakaka",
+      "description": "Hotel lindo",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel4.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 5,
+      "name": "Hotel lalala",
+      "description": "Hotel caro",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel5.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 6,
+      "name": "Hotel Sururu",
+      "description": "Hotel gostoso",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel6.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 7,
+      "name": "Hotel Narara",
+      "description": "Hotel top",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel7.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 8,
+      "name": "Hotel Hohoho",
+      "description": "Hotel foda",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel2.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 9,
+      "name": "Hotel kakaka",
+      "description": "Hotel lindo",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel4.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
+    },
+    {
+      "id": 10,
+      "name": "Hotel lalala",
+      "description": "Hotel caro",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel6.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
     }
   ]
 }

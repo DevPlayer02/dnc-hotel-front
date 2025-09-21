@@ -18,11 +18,11 @@ const ImageField = ({ id, label, name }: ImageFieldProps) => {
     const file = e.target.files?.[0];
     const reader = new FileReader();
 
-    setExceededImageSize(file?.size as number > MAX_SIZE)
+    setExceededImageSize((file?.size as number) > MAX_SIZE);
 
     reader.onloadend = () => {
       setImage(reader.result);
-    }
+    };
 
     if (file) {
       reader.readAsDataURL(file);
@@ -30,18 +30,17 @@ const ImageField = ({ id, label, name }: ImageFieldProps) => {
   };
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <Image
-        src={image ? (image as string) : "/default-profile.jpg"}
-        width={100}
-        height={100}
-        alt="Profile picture"
-        className="rounded-full relative object-cover w-24 h-24"
-      />
-      <label
-        htmlFor={id}
-        className="py-4 px-6 w-full border-none rounded-lg font-bold text-center cursor-pointer"
-      >
-        {label}
+      <label htmlFor={id} className="cursor-pointer flex flex-col items-center">
+        <Image
+          src={typeof image === "string" ? image : "/default-profile.jpg"}
+          width={100}
+          height={100}
+          alt="Profile picture"
+          className="rounded-full object-cover w-24 h-24"
+        />
+        <span className="py-4 px-6 w-full rounded-lg font-bold text-center">
+          {label}
+        </span>
       </label>
       {exceededImageSize && (
         <span className="text-red-500 text-xs">
