@@ -1,21 +1,44 @@
-import Button from "../components/Button";
-import Link from "../components/Link";
-import TextField from "../components/Form/TextField";
-import ImageField from "../components/Form/ImageField";
-import Pagination from "../components/Pagination";
-import Alert from "../components/Alert";
+import { getServerSession } from "next-auth";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getHotels } from "./api/hotels/action";
+import { getFormattedPrice } from "@/helpers/format/money";
 
-export default function Home() {
+export default async function Home() {
+  // const session = await getServerSession();
+  // if (!session?.user) redirect("/login");
+  const hotels = await getHotels();
+
   return (
-    <section>
-      PRINCIPAL PAGE
-      <Button>clique here</Button>
-      <Button appearance="secondary">clique here</Button>
-      <Link href="teste"> Ir para teste </Link>
-      <TextField label="Full name" id="full_name" name="full_name" />
-      <ImageField name="profile_picture" label="Select the photo" id="profile_picture" />
-      <Pagination currentPage={7} destination="/" totalPages={100} />
-      <Alert type="success" >This is feedback for my user.</Alert>
+    <section className="grid grid-cols-1 gap-2 px-5 sm:grid-cols-2 sm:px-10 md:grid-cols-3 lg:grid-cols-4 mt-20 mb-20">
+      {hotels.map((hotel) => (
+        <Link
+          href="/hotels/1"
+          key={hotel.id}
+          className="p-6 m-4 bg-white rounded-3xl shadow-md hover:shadow-xl transition-shadow "
+        >
+          <article className="flex flex-col justify-center items-center">
+            <div className="w-64 h-48">
+              <Image
+                src={hotel.image ?? "/no-hotel.jpg"}
+                width={250}
+                height={250}
+                quality={100}
+                alt={`Hotel image ${hotel.name}`}
+                className="object-cover rounded-3xl h-48"
+              />
+            </div>
+            <div className="flex flex-col mt-4">
+              <h3 className="font-bold mt-0">{hotel.name}</h3>
+              <span className="mt-2"> {hotel.owner.name} </span>
+              <span className="mt-2">
+                <b>{getFormattedPrice(hotel.price)}</b> noite
+              </span>
+            </div>
+          </article>
+        </Link>
+      ))}
     </section>
   );
 }

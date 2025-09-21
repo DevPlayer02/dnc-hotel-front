@@ -4,14 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev -p 3001 --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "mock": "node --watch mock-server.js"
+    "mock": "node --watch mock-server.js",
+    "dev:mock": "concurrently \"npm run dev\" \"npm run mock\""
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.12",
+    "axios": "^1.12.2",
     "next": "15.4.7",
     "next-auth": "^4.24.11",
     "react": "19.1.0",
@@ -20,10 +22,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.12",
+    "@types/axios": "^0.9.36",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "15.4.7",
     "json-server": "^0.17.4",
