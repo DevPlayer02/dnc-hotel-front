@@ -74,5 +74,25 @@ app.post('/users/avatar', (req, res) => {
   })
 })
 
+app.get('/hotels', (req, res) => {
+  const page = Number(req.query.page) || 1;
+  const perPage = Number(req.query.limit) || 10;
+
+  const hotels = app.db.get('hotels').value();
+
+  const total = hotels.length;
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
+
+  const paginatedHotels = hotels.slice(start, end);
+
+  res.status(200).jsonp({
+    total,
+    page: page,
+    per_page: perPage,
+    data: paginatedHotels,
+  })
+} )
+
 app.use(router);
 app.listen(3000);

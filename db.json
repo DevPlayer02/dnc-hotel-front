@@ -195,6 +195,24 @@
         "password": "12345",
         "avatar": null
       }
+    },
+    {
+      "id": 11,
+      "name": "Hotel lalala",
+      "description": "Hotel caro",
+      "address": "Rua da sacanagem, 321",
+      "image": "/hotel6.jpg",
+      "price": 200,
+      "ownerId": 1,
+      "createdAt": "2025-09-20T22:28:15.615Z",
+      "updatedAt": "2025-09-20T22:28:15.615Z",
+      "owner": {
+        "id": 1,
+        "name": "Xoh Hackudo",
+        "email": "xohackudo@dnc.com",
+        "password": "12345",
+        "avatar": null
+      }
     }
   ]
 }
