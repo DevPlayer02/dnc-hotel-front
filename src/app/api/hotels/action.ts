@@ -1,16 +1,20 @@
 import axios from "@/api";
-import { Hotel } from "@/types/Hotel";
+import { HotelPagination } from "@/types/Hotel";
 import { cookies } from "next/headers";
 
-export async function getHotels(): Promise<Hotel[]> {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get("access_token")?.value;
+export async function getHotels(page: number, limit: number): Promise<HotelPagination> {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
 
-    const { data } = await axios.get('/hotels', {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        }
-    })
+  const { data } = await axios.get("/hotels", {
+    params: {
+      page,
+      limit,
+    },
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
-    return data;
+  return data as HotelPagination;
 }

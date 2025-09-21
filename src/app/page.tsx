@@ -4,41 +4,62 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getHotels } from "./api/hotels/action";
 import { getFormattedPrice } from "@/helpers/format/money";
+import Pagination from "@/components/Pagination";
 
-export default async function Home() {
+type SearchParams = {
+  page: string;
+  query: string;
+};
+
+type HomeProps = {
+  searchParams: SearchParams;
+};
+
+const LIMIT = 8;
+
+export default async function Home({ searchParams }: HomeProps) {
   // const session = await getServerSession();
+
   // if (!session?.user) redirect("/login");
-  const hotels = await getHotels();
+
+  const currentPage = Number(searchParams.page ?? 1);
+
+  const { data: hotels, per_page, page, total } = await getHotels(currentPage, LIMIT);
 
   return (
-    <section className="grid grid-cols-1 gap-2 px-5 sm:grid-cols-2 sm:px-10 md:grid-cols-3 lg:grid-cols-4 mt-20 mb-20">
-      {hotels.map((hotel) => (
-        <Link
-          href="/hotels/1"
-          key={hotel.id}
-          className="p-6 m-4 bg-white rounded-3xl shadow-md hover:shadow-xl transition-shadow "
-        >
-          <article className="flex flex-col justify-center items-center">
-            <div className="w-64 h-48">
-              <Image
-                src={hotel.image ?? "/no-hotel.jpg"}
-                width={250}
-                height={250}
-                quality={100}
-                alt={`Hotel image ${hotel.name}`}
-                className="object-cover rounded-3xl h-48"
-              />
-            </div>
-            <div className="flex flex-col mt-4">
-              <h3 className="font-bold mt-0">{hotel.name}</h3>
-              <span className="mt-2"> {hotel.owner.name} </span>
-              <span className="mt-2">
-                <b>{getFormattedPrice(hotel.price)}</b> noite
-              </span>
-            </div>
-          </article>
-        </Link>
-      ))}
-    </section>
+    <div>
+      <section className="grid grid-cols-1 gap-2 px-5 sm:grid-cols-2 sm:px-10 md:grid-cols-3 lg:grid-cols-4 mt-20 mb-20">
+        {hotels.map((hotel) => (
+          <Link
+            href="/hotels/1"
+            key={hotel.id}
+            className="p-6 m-4 bg-white rounded-3xl shadow-md hover:shadow-xl transition-shadow "
+          >
+            <article className="flex flex-col justify-center items-center">
+              <div className="w-64 h-48">
+                <Image
+                  src={hotel.image ?? "/no-hotel.jpg"}
+                  width={250}
+                  height={250}
+                  quality={100}
+                  alt={`Hotel image ${hotel.name}`}
+                  className="object-cover rounded-3xl h-48"
+                />
+              </div>
+              <div className="flex flex-col mt-4">
+                <h3 className="font-bold mt-0">{hotel.name}</h3>
+                <span className="mt-2"> {hotel.owner.name} </span>
+                <span className="mt-2">
+                  <b>{getFormattedPrice(hotel.price)}</b> noite
+                </span>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </section>
+      <section className="flex justify-center mt-4 mb-8">
+        <Pagination totalPages={Math.ceil(total / per_page)} currentPage={currentPage} destination="/"/>
+      </section>
+    </div>
   );
 }
