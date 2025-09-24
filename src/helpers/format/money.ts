@@ -1,5 +1,8 @@
 export const getFormattedPrice = (price: number | string) => {
-    const numberPrice = Number(price)
+  const numberPrice = Number(price);
 
-    return Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(numberPrice)
-}
+  return Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(numberPrice);
+};

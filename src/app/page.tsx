@@ -19,10 +19,11 @@ const LIMIT = 8;
 
 export default async function Home({ searchParams }: HomeProps) {
   // const session = await getServerSession();
-
   // if (!session?.user) redirect("/login");
 
-  const currentPage = Number(searchParams.page ?? 1);
+  const sp = await searchParams;
+  const rawPage = Array.isArray(sp?.page) ? sp.page[0] : sp?.page;
+  const currentPage = Number(rawPage ?? 1);
 
   const { data: hotels, per_page, page, total } = await getHotels(currentPage, LIMIT);
 
@@ -31,7 +32,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <section className="grid grid-cols-1 gap-2 px-5 sm:grid-cols-2 sm:px-10 md:grid-cols-3 lg:grid-cols-4 mt-20 mb-20">
         {hotels.map((hotel) => (
           <Link
-            href="/hotels/1"
+            href={`/hotels/${hotel.id}`}
             key={hotel.id}
             className="p-6 m-4 bg-white rounded-3xl shadow-md hover:shadow-xl transition-shadow "
           >
