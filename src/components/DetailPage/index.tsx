@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Link from "../Link";
-import Image from "next/image";
+import CustomImage from "../CustomImage";
 
 type ImageProps = {
   src: string | null;
@@ -28,21 +28,21 @@ const DetailPage = ({
   asideContainer,
 }: DetailPageProps) => {
   return (
-    <div className="flex flex-col w-full px-10 py-20 sm:px-20 md:px-32 lg:px-56 xl:px-72">
-      <section>
+    <div className="flex flex-col w-full px-10 sm:px-20 md:px-32 lg:px-56 xl:px-72">
+      <section className="pt-20 pb-4">
         <Link href={previousPage}> Back </Link>
       </section>
       {image && (
-        <section className="relative w-full h-80 mt-2">
-          <Image
-            src={image.src ?? "/no-hotel.jpg"}
+        <section className="relative w-full h-80 mt-2"> 
+          <CustomImage
+            src={image.src}
+            uploadsPath="hotel"
             alt={image.alt}
-            fill
-            className="object-cover rounded-3xl"
+            className="object-cover rounded-3xl  w-full h-full"
           />
         </section>
       )}
-      <section className="flex flex-col mt-2 sm:flex-row">
+       <section className="flex flex-col mt-10 sm:flex-row pb-20"> 
         <article className="w-full">
           <h1 className="font-bold text-4xl"> {title}</h1>
           {children}

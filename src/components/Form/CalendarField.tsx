@@ -13,7 +13,7 @@ const CalendarField = ({
   ...props
 }: CalendarFieldProps) => {
   const defaultStyle =
-    "border border-light-grey-600 rounded-lg w-full px-4 py-2";
+    "border border-light-grey-600 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent";
   const errorStyle = "border-red-500";
 
   return (

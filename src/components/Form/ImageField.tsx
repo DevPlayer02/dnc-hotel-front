@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
+import CustomImage from "../CustomImage";
 
 type ImageFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -31,7 +31,7 @@ const ImageField = ({ id, label, name }: ImageFieldProps) => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <label htmlFor={id} className="cursor-pointer flex flex-col items-center">
-        <Image
+        <CustomImage
           src={typeof image === "string" ? image : "/default-profile.jpg"}
           width={100}
           height={100}
