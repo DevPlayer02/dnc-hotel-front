@@ -1,9 +1,9 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "@/api";
-import { cookies } from "next/headers";
+import api from "@/api";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -12,46 +12,58 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials) throw new Error("no credentials!");
+        if (!credentials) throw new Error("No credentials provided");
 
-        const {
-          data: { access_token },
-        } = await axios.post<{ access_token: string }>("/auth/login", {
-          email: credentials?.email,
-          password: credentials?.password,
-        });
+        try {
+          const { data: loginData } = await api.post("/auth/login", {
+            email: credentials.email,
+            password: credentials.password,
+          });
 
-        const cookieStore = await cookies();
-        cookieStore.set("access_token", access_token);
+          const access_token = loginData?.access_token;
+          if (!access_token) {
+            console.error("No access_token in login response", loginData);
+            return null;
+          }
 
-        const { sub: id } = JSON.parse(
-          Buffer.from(access_token.split(".")[1], "base64").toString()
-        );
+          const payload = JSON.parse(
+            Buffer.from(access_token.split(".")[1], "base64").toString()
+          );
+          const userId = payload?.sub;
 
-        const { data: user } = await axios.get(`/users/${id}`, {
-          headers: { Authorization: `Bearer ${access_token}` },
-        });
+          const { data: user } = await api.get(`/users/${userId}`, {
+            headers: { Authorization: `Bearer ${access_token}` },
+          });
 
-        return {
-          ...user,
-          access_token,
-          image: user.avatar,
-        };
+          return {
+            ...user,
+            access_token,
+            image: user.avatar,
+          };
+        } catch (err) {
+          console.error("authorize error:", err);
+          return null;
+        }
       },
     }),
   ],
+
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      if (user) {
+        return { ...token, ...user };
+      }
+      return token;
     },
+
     async session({ session, token }) {
       session.user = token as any;
       return session;
     },
   },
+
   pages: { signIn: "/login" },
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };

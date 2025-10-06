@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getHotels } from "./api/hotels/action";
 import { getFormattedPrice } from "@/helpers/format/money";
 import Pagination from "@/components/Pagination";
+import CustomImage from "@/components/CustomImage";
 
 type SearchParams = {
   page: string;
@@ -18,8 +18,10 @@ type HomeProps = {
 const LIMIT = 8;
 
 export default async function Home({ searchParams }: HomeProps) {
-  // const session = await getServerSession();
-  // if (!session?.user) redirect("/login");
+  const session = await getServerSession();
+  if (!session) {
+    redirect("/login");
+  }
 
   const sp = await searchParams;
   const rawPage = Array.isArray(sp?.page) ? sp.page[0] : sp?.page;
@@ -36,22 +38,22 @@ export default async function Home({ searchParams }: HomeProps) {
             key={hotel.id}
             className="p-6 m-4 bg-white rounded-3xl shadow-md hover:shadow-xl transition-shadow "
           >
-            <article className="flex flex-col justify-center items-center">
+            <article className="flex flex-col">
               <div className="w-64 h-48">
-                <Image
-                  src={hotel.image ?? "/no-hotel.jpg"}
+                <CustomImage
+                  src={hotel.image}
+                  uploadsPath="/uploads-hotel"
                   width={250}
                   height={250}
-                  quality={100}
                   alt={`Hotel image ${hotel.name}`}
                   className="object-cover rounded-3xl h-48"
                 />
               </div>
-              <div className="flex flex-col mt-4">
+              <div className="flex flex-col mt-4 ml-2">
                 <h3 className="font-bold mt-0">{hotel.name}</h3>
-                <span className="mt-2"> {hotel.owner.name} </span>
+                <span className="mt-2"> <b>Host:</b> {hotel.owner.name} </span>
                 <span className="mt-2">
-                  <b>{getFormattedPrice(hotel.price)}</b> noite
+                  <b>U$ {getFormattedPrice(hotel.price)}</b> night
                 </span>
               </div>
             </article>

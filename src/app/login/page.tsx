@@ -12,7 +12,6 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = e.target as HTMLFormElement;
     const email = form.email.value;
     const password = form.password.value;
