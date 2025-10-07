@@ -12,7 +12,7 @@ const UserDetail = ({ user }: UserDetailProps) => {
   const normalizedSrc = normalizeImageSrc(rawAvatarSrc);
   
   return (
-    <div className="mt-4 flex">
+    <div className="w-full p-4 border border-gray-200 shadow-lg rounded-xl mt-4 flex items-center">
       <CustomImage
         src={normalizedSrc}
         alt={`Host's photo ${user.name}`}

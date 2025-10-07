@@ -92,7 +92,21 @@ app.get('/hotels', (req, res) => {
     per_page: perPage,
     data: paginatedHotels,
   })
-} )
+});
+
+app.post('/reservations', (req, res) => { 
+  res.status(201).jsonp({
+    id: 1,
+    userId: 2,
+    hotelId: 2,
+    checkIn: "2025-10-10T03:00:00.000Z",
+    checkOut: "2025-10-16T03:00:00.000Z",
+    total: -420,
+    status: "PENDING",
+    createdAt: "2025-10-06T22:21:01.892Z",
+    updatedAt: "2025-10-06T22:21:01.892Z"
+  })
+})
 
 app.use(router);
 app.listen(3000);

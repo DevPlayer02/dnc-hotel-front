@@ -5,16 +5,9 @@ import HotelBookingForm from "./HotelBookingForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import UserDetail from "@/components/UserDetail/server";
+import { DetailPageProps } from "@/types/DetailPage";
 
-type Params = {
-  id: string;
-};
-
-type HotelDetailProps = {
-  params: Params;
-};
-
-const HotelDetail = async ({ params }: HotelDetailProps) => {
+const HotelDetail = async ({ params }: DetailPageProps) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
@@ -34,6 +27,7 @@ const HotelDetail = async ({ params }: HotelDetailProps) => {
         title: <>U$ {getFormattedPrice(hotel.price)}&nbsp;per night</>,
         children: <HotelBookingForm  hotel={hotel}/>,
       }}
+      className="max-w-screen-2xl mx-auto" 
     >
       <UserDetail user={hotel.owner} />
       <div className="mt-4 flex flex-col">

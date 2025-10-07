@@ -71,14 +71,14 @@ const HotelBookingForm = ({ hotel }: HotelBookingFormProps) => {
         />
       </div>
       <hr className="mt-10 mb-10" />
-      <div className="flex w-full justify-between font-boldmt-6">
+      <div className="flex w-full justify-around font-bold mt-2 mb-6">
         <span>Total</span>
         <span>U$ {getFormattedPrice(estimatedPrice)}&nbsp;</span>
       </div>
       {state.error && (
         <Alert type="danger">{ state.message }</Alert> 
       )}
-      <Button appearance="primary" type="submit" disabled={false} className="mt-10 block">Book now</Button>
+      <Button appearance="primary" type="submit" disabled={false} className="mt-2 block">Book now</Button>
     </form>
   );
 };
