@@ -18,6 +18,7 @@ type DetailPageProps = {
   image?: ImageProps;
   title: string;
   asideContainer: AsideContainerProps;
+  className?: string; 
 };
 
 const DetailPage = ({
@@ -26,9 +27,10 @@ const DetailPage = ({
   image,
   title,
   asideContainer,
+  className,
 }: DetailPageProps) => {
   return (
-    <div className="flex flex-col w-full px-10 sm:px-20 md:px-32 lg:px-56 xl:px-72">
+    <div className={`flex flex-col w-full px-10 sm:px-20 md:px-32 lg:px-56 xl:px-72 ${className || ''}`}>
       <section className="pt-20 pb-4">
         <Link href={previousPage}> Back </Link>
       </section>
@@ -43,12 +45,12 @@ const DetailPage = ({
         </section>
       )}
        <section className="flex flex-col mt-10 sm:flex-row pb-20"> 
-        <article className="w-full">
-          <h1 className="font-bold text-4xl"> {title}</h1>
+        <article className="w-full flex flex-col">
+          <h1 className="font-bold text-4xl mb-6 text-center"> {title}</h1>
           {children}
         </article>
         <article className="w-full h-auto shadow-lg rounded-xl ml-0 p-8 flex flex-col justify-start self-start sm:ml-10">
-          <span className="flex text-2xl font-bold">
+          <span className="flex justify-center text-2xl font-bold">
             {asideContainer.title}
           </span>
           <div className="mt-0">{asideContainer.children}</div>
