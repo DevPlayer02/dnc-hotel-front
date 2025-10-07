@@ -16,7 +16,7 @@ export async function reserveHotelById(prevState: any, formData: FormData) {
 
   try {
     const payload = {
-      hotelId: formData.get("hotelId"),
+      hotelId: Number(formData.get("hotelId")),
       checkIn: formData.get("checkIn"),
       checkOut: formData.get("checkOut"),
     };
@@ -28,6 +28,7 @@ export async function reserveHotelById(prevState: any, formData: FormData) {
     });
     reservationId = data.id;
   } catch (error) {
+    console.log({error})
     return {
       ...prevState,
       message: "Failed to create reservation",
