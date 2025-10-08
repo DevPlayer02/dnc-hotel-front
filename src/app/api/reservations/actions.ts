@@ -54,3 +54,27 @@ export async function getReservationById(id: number): Promise<Reservation> {
 
   return { ...data, hotel};
 }
+
+export async function getReservationsByUser(): Promise<Reservation[]> { 
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.user?.access_token;
+
+  if (!accessToken) redirect("/login");
+
+  const { data } = await axios.get("/reservations/user", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  
+  if (data.lenght) {
+    const reservations = await Promise.all(data.map(async (reservation: Reservation) => {
+      const hotel = await getHotelDetail(reservation.hotelId);
+      return { ...reservation, hotel };
+    }));
+
+    return reservations;
+  }
+
+  return data as Reservation[];
+}

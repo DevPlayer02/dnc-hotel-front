@@ -15,7 +15,7 @@ export interface NormalizeOptions {
 
 const UPLOAD_PATHS: Record<string, string> = {
     "hotel": "/uploads-hotel",
-    "default": "/uploads", // Adicionado o novo caminho /uploads
+    "default": "/uploads",
 };
 
 
@@ -41,8 +41,8 @@ export function normalizeImageSrc(input?: SrcType, options?: NormalizeOptions): 
   if (typeof input === "string") {
     const s = input.trim();
     if (!s) return placeholder;
-    if (/^https?:\/\//i.test(s)) return s; // É um URL completo, retorna
-    if (s.startsWith("/")) return s;        // Já é um path absoluto, retorna
+    if (/^https?:\/\/|blob:/i.test(s)) return s; 
+    if (s.startsWith("/")) return s;
     return buildUrl(s);
   }
 
