@@ -254,6 +254,101 @@
         "password": "12345",
         "avatar": "/user-photo.jpg",
         "createdAt": "2025-10-01T00:14:00.975Z"
+      },
+      "hotel": {
+        "id": 1,
+        "name": "Hotel Sururu",
+        "description": "Hotel gostoso",
+        "address": "Rua da sacanagem, 321",
+        "image": "/hotel1.jpg",
+        "price": 200,
+        "ownerId": 1,
+        "createdAt": "2025-09-20T22:28:15.615Z",
+        "updatedAt": "2025-09-20T22:28:15.615Z",
+        "owner": {
+          "id": 1,
+          "name": "Xoh Hackudo",
+          "email": "xohackudo@dnc.com",
+          "password": "12345",
+          "avatar": "/user-photo.jpg",
+          "createdAt": "2025-10-01T00:14:00.975Z"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "userId": 2,
+      "hotelId": 2,
+      "checkIn": "2025-10-10T03:00:00.000Z",
+      "checkOut": "2025-10-16T03:00:00.000Z",
+      "total": -420,
+      "status": "APPROVED",
+      "createdAt": "2025-10-06T22:21:01.892Z",
+      "updatedAt": "2025-10-06T22:21:01.892Z",
+      "user": {
+        "id": 2,
+        "name": "void1000",
+        "email": "void1000@dnc.com",
+        "password": "12345",
+        "avatar": "/user-photo.jpg",
+        "createdAt": "2025-10-01T00:14:00.975Z"
+      },
+      "hotel": {
+        "id": 1,
+        "name": "Hotel Sururu",
+        "description": "Hotel gostoso",
+        "address": "Rua da sacanagem, 321",
+        "image": "/hotel1.jpg",
+        "price": 200,
+        "ownerId": 1,
+        "createdAt": "2025-09-20T22:28:15.615Z",
+        "updatedAt": "2025-09-20T22:28:15.615Z",
+        "owner": {
+          "id": 1,
+          "name": "Xoh Hackudo",
+          "email": "xohackudo@dnc.com",
+          "password": "12345",
+          "avatar": "/user-photo.jpg",
+          "createdAt": "2025-10-01T00:14:00.975Z"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "userId": 2,
+      "hotelId": 2,
+      "checkIn": "2025-10-10T03:00:00.000Z",
+      "checkOut": "2025-10-16T03:00:00.000Z",
+      "total": -420,
+      "status": "CANCELLED",
+      "createdAt": "2025-10-06T22:21:01.892Z",
+      "updatedAt": "2025-10-06T22:21:01.892Z",
+      "user": {
+        "id": 2,
+        "name": "void1000",
+        "email": "void1000@dnc.com",
+        "password": "12345",
+        "avatar": "/user-photo.jpg",
+        "createdAt": "2025-10-01T00:14:00.975Z"
+      },
+      "hotel": {
+        "id": 1,
+        "name": "Hotel Sururu",
+        "description": "Hotel gostoso",
+        "address": "Rua da sacanagem, 321",
+        "image": "/hotel1.jpg",
+        "price": 200,
+        "ownerId": 1,
+        "createdAt": "2025-09-20T22:28:15.615Z",
+        "updatedAt": "2025-09-20T22:28:15.615Z",
+        "owner": {
+          "id": 1,
+          "name": "Xoh Hackudo",
+          "email": "xohackudo@dnc.com",
+          "password": "12345",
+          "avatar": "/user-photo.jpg",
+          "createdAt": "2025-10-01T00:14:00.975Z"
+        }
       }
     }
   ]

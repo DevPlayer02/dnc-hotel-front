@@ -1,38 +1,48 @@
 "use client";
-import { ChangeEvent, InputHTMLAttributes, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import CustomImage from "../CustomImage";
 
 type ImageFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   name: string;
+  id: string;
 };
 
-const MAX_SIZE = 300 * 1024;
+const MAX_SIZE = 3 * 1024 * 1024;
 
-const ImageField = ({ id, label, name }: ImageFieldProps) => {
-  const [image, setImage] = useState<string | null | ArrayBuffer>(null);
+const ImageField = ({ id, label, name, ...rest }: ImageFieldProps) => {
+  const inputId = id ?? name ?? "image-field";
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [exceededImageSize, setExceededImageSize] = useState(false);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-    const file = e.target.files?.[0];
-    const reader = new FileReader();
-
-    setExceededImageSize((file?.size as number) > MAX_SIZE);
-
-    reader.onloadend = () => {
-      setImage(reader.result);
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
     };
+  }, [previewUrl]);
 
-    if (file) {
-      reader.readAsDataURL(file);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+
+    if (!file) {
+      setPreviewUrl(null);
+      setExceededImageSize(false);
+      return;
     }
+
+    setExceededImageSize(file.size > MAX_SIZE);
+    
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url); 
   };
+
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <label htmlFor={id} className="cursor-pointer flex flex-col items-center">
+      <label htmlFor={inputId} className="cursor-pointer flex flex-col items-center">
         <CustomImage
-          src={typeof image === "string" ? image : "/default-profile.jpg"}
+          src={previewUrl ?? "/default-profile.jpg"}
           width={100}
           height={100}
           alt="Profile picture"
@@ -53,6 +63,7 @@ const ImageField = ({ id, label, name }: ImageFieldProps) => {
         id={id}
         className="hidden"
         onChange={handleInputChange}
+        {...rest}
       />
     </div>
   );
