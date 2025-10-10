@@ -9,26 +9,31 @@ type UserDetailProps = { reservation: Reservation };
 const UserDetail = ({ reservation }: UserDetailProps) => {
   const { data, status } = useSession();
   const currentRole = data?.user?.role;
-  const isLoading = status === 'loading';
+  const isLoading = status === "loading";
 
   if (isLoading) {
-    return (
-      <div className="max-w-sm w-full mt-4">
-        {/* skeleton */}
-      </div>
-    );
+    return <div className="max-w-sm w-full mt-4">{/* skeleton */}</div>;
   }
 
   if (!currentRole) {
-      return null;
+    return null;
   }
-  
-  const displayUser = currentRole === "USER" 
-    ? reservation.hotel.owner 
-    : reservation.user;
 
-  const user = displayUser || {}; 
-  const avatarSrc = normalizeImageSrc(user.avatar);
+   if (!reservation || !reservation.hotel) {
+    return <div className="mt-4">Booking information unavailable.</div>;
+  }
+
+  const { hotel, user: reservedUser } = reservation;
+
+  const displayUser = currentRole === "USER" ? hotel.owner : reservedUser;
+
+  const { 
+    name, 
+    avatar, 
+    createdAt 
+  } = displayUser ?? {};
+  
+  const avatarSrc = normalizeImageSrc(avatar);
   const finalAvatarSrc = avatarSrc || "/default-avatar.png";
 
   return (
@@ -37,20 +42,20 @@ const UserDetail = ({ reservation }: UserDetailProps) => {
         {finalAvatarSrc ? (
           <Image
             src={finalAvatarSrc}
-            alt={`Foto do Host ${user.name ?? "user"}`}
+            alt={`Foto do Host ${name ?? "user"}`}
             width={56}
             height={56}
-            className="w-full h-full object-cover" // <-- Garante que a imagem preencha a div
+            className="w-full h-full object-cover"
           />
         ) : (
-          <span>{user.name?.[0] ?? "U"}</span>
+          <span>{name?.[0] ?? "U"}</span>
         )}
       </div>
 
       <div className="flex flex-col ml-3 justify-center">
-        <b>Host: {user.name ?? "—"}</b>
+        <b>Host: {name ?? "—"}</b>
         <span className="font-medium">
-          Desde {user.createdAt ? new Date(user.createdAt).getFullYear() : "—"}
+          Desde {createdAt ? new Date(createdAt).getFullYear() : "—"}
         </span>
       </div>
     </div>

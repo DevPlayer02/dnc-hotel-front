@@ -16,29 +16,29 @@ const DetailListItem = ({ reservation }: DetailListItemProps) => {
       className="flex w-full mt-5 md:mt-0"
     >
       <CustomImage
-        src={reservation.hotel.image ?? "/no-hotel.jpg"}
-        alt={`Hotel's photo ${reservation.hotel.name}`}
+        src={/*reservation.hotel.image ??*/ "/no-hotel.jpg"}
+        alt={`Hotel's photo ${/*${reservation.hotel.name}*/""}`}
         width={300}
         height={300}
         className="rounded-lg w-32 h-32 object-cover"
       />
-      <div className="w-full flex flex-col justify-between ml-4">
-        <b>{reservation.hotel.name}</b>
+      <div className="w-full flex flex-col justify-around ml-4">
+        <b>{/*{reservation.hotel.name}*/}</b>
         <div>
           <DetailRow
             title="Status:"
             description={getFormattedStatus(reservation.status)}
-            className="mt-1"
+            className="mb-3"
           />
           <DetailRow
             title="Check-in:"
             description={getFormattedDate(reservation.checkIn)}
-            className="mt-1"
+            className="mb-3"
           />
           <DetailRow
             title="Check-out:"
             description={getFormattedDate(reservation.checkOut)}
-            className="mt-1"
+            className="mb-3"
           />
         </div>
       </div>
