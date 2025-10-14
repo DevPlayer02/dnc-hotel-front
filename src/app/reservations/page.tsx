@@ -3,7 +3,7 @@ import { getReservationsByUser } from "../api/reservations/actions";
 import { redirect } from "next/navigation";
 import DetailListItem from "@/components/DetailListItem";
 import Link from "@/components/Link";
-import { STATUS } from "@/helpers/dictionary/status";
+import { STATUS } from "@/helpers/format/dictionary/status";
 import { Reservation } from "@/types/Reservation";
 
 type ReducedReservations = {
@@ -32,7 +32,7 @@ const ReservationsPage = async () => {
 
   return (
     <div className="py-10">
-      <Link href="/perfil" className="my-6">
+      <Link href="/profile" className="my-6">
         Back
       </Link>
       <h1 className="font-bold text-4xl">My Stays</h1>

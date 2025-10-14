@@ -1,8 +1,8 @@
 "use client";
 import { Reservation } from "@/types/Reservation";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import { normalizeImageSrc } from "@/helpers/format/image";
+import CustomImage from "../CustomImage";
 
 type UserDetailProps = { reservation: Reservation };
 
@@ -40,7 +40,7 @@ const UserDetail = ({ reservation }: UserDetailProps) => {
     <div className="mt-4 flex items-center">
       <div className="rounded-full w-14 h-14 object-cover overflow-hidden bg-slate-400 flex items-center justify-center text-white font-bold flex-shrink-0">
         {finalAvatarSrc ? (
-          <Image
+          <CustomImage
             src={finalAvatarSrc}
             alt={`Foto do Host ${name ?? "user"}`}
             width={56}

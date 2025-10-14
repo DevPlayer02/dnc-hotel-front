@@ -5,7 +5,7 @@ function stripSlashEnd(s: string): string { return s.replace(/\/+$/, ""); }
 
 const TINY_PLACEHOLDER = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAKbV0YMAAAAASUVORK5CYII=";
 
-export type UploadPathKey = "hotel" | "default" | string;
+export type UploadPathKey = "hotel" | "avatar" | string;
 
 export interface NormalizeOptions {
   base?: string;
@@ -15,7 +15,7 @@ export interface NormalizeOptions {
 
 const UPLOAD_PATHS: Record<string, string> = {
     "hotel": "/uploads-hotel",
-    "default": "/uploads",
+    "avatar": "/uploads",
 };
 
 
@@ -30,8 +30,8 @@ export function normalizeImageSrc(input?: SrcType, options?: NormalizeOptions): 
   if (typeof options?.uploadsPath === 'string' && options.uploadsPath.startsWith('/')) {
       uploadsPath = options.uploadsPath;
   } else {
-      const key = (options?.uploadsPath as UploadPathKey) ?? 'default';
-      uploadsPath = UPLOAD_PATHS[key] ?? UPLOAD_PATHS['default'];
+      const key = (options?.uploadsPath as UploadPathKey) ?? 'avatar';
+      uploadsPath = UPLOAD_PATHS[key] ?? UPLOAD_PATHS['avatar'];
   }
 
   const buildUrl = (pathSegment: string) => 

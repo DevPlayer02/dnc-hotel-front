@@ -13,7 +13,7 @@ const HotelDetail = async ({ params }: DetailPageProps) => {
 
   const { id } = await params;
   const hotel = await getHotelDetail(Number(id));
-  console.log({ hotel });
+  console.log(hotel);
 
   return (
     <DetailPage
