@@ -239,7 +239,7 @@
   "reservations": [
     {
       "id": 1,
-      "userId": 2,
+      "userId": 3,
       "hotelId": 2,
       "checkIn": "2025-10-10T03:00:00.000Z",
       "checkOut": "2025-10-16T03:00:00.000Z",
@@ -277,7 +277,7 @@
     },
     {
       "id": 1,
-      "userId": 2,
+      "userId": 3,
       "hotelId": 2,
       "checkIn": "2025-10-10T03:00:00.000Z",
       "checkOut": "2025-10-16T03:00:00.000Z",
@@ -315,7 +315,7 @@
     },
     {
       "id": 1,
-      "userId": 2,
+      "userId": 3,
       "hotelId": 2,
       "checkIn": "2025-10-10T03:00:00.000Z",
       "checkOut": "2025-10-16T03:00:00.000Z",

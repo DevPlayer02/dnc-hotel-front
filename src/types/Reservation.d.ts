@@ -14,5 +14,5 @@ export type Reservation = {
     createdAt: string;
     updatedAt: string;
     user: User;
-    hotel: Hotel
+    hotel: Hotel;
 };
