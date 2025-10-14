@@ -1,3 +1,5 @@
+import { Reservation } from "./Reservation";
+
 export type Role = "ADMIN" | "USER";
 
 export type User = {
@@ -6,7 +8,8 @@ export type User = {
   email: string;
   role: Role;
   password?: string;
-  avatar: string |null;
+  avatar: string | null;
+  lastReservation?: Reservation;
   createdAt: string;
   updatedAt: string;
 };

@@ -6,7 +6,18 @@
       "email": "xohackudo@dnc.com",
       "password": "12345",
       "avatar": "/user-photo.jpg",
-      "createdAt": "2025-10-01T00:14:00.975Z"
+      "createdAt": "2025-10-01T00:14:00.975Z",
+      "lastReservation": {
+        "id": 1,
+        "userId": 3,
+        "hotelId": 2,
+        "checkIn": "2025-10-10T03:00:00.000Z",
+        "checkOut": "2025-10-16T03:00:00.000Z",
+        "total": -420,
+        "status": "PENDING",
+        "createdAt": "2025-10-06T22:21:01.892Z",
+        "updatedAt": "2025-10-06T22:21:01.892Z"
+      }
     },
     {
       "id": 2,
@@ -14,7 +25,18 @@
       "email": "void1000@dnc.com",
       "password": "12345",
       "avatar": "/user-photo.jpg",
-      "createdAt": "2025-10-01T00:14:00.975Z"
+      "createdAt": "2025-10-01T00:14:00.975Z",
+      "lastReservation": {
+        "id": 1,
+        "userId": 3,
+        "hotelId": 2,
+        "checkIn": "2025-10-10T03:00:00.000Z",
+        "checkOut": "2025-10-16T03:00:00.000Z",
+        "total": -420,
+        "status": "PENDING",
+        "createdAt": "2025-10-06T22:21:01.892Z",
+        "updatedAt": "2025-10-06T22:21:01.892Z"
+      }
     },
     {
       "id": 3,
@@ -22,7 +44,18 @@
       "email": "fulano@dnc.com",
       "password": "12345",
       "avatar": "/user-photo.jpg",
-      "createdAt": "2025-10-01T00:14:00.975Z"
+      "createdAt": "2025-10-01T00:14:00.975Z",
+      "lastReservation": {
+        "id": 1,
+        "userId": 3,
+        "hotelId": 2,
+        "checkIn": "2025-10-10T03:00:00.000Z",
+        "checkOut": "2025-10-16T03:00:00.000Z",
+        "total": -420,
+        "status": "PENDING",
+        "createdAt": "2025-10-06T22:21:01.892Z",
+        "updatedAt": "2025-10-06T22:21:01.892Z"
+      }
     }
   ],
   "hotels": [

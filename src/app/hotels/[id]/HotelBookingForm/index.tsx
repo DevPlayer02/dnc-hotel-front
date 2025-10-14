@@ -70,8 +70,7 @@ const HotelBookingForm = ({ hotel }: HotelBookingFormProps) => {
           }}
         />
       </div>
-      <hr className="mt-10 mb-10" />
-      <div className="flex w-full justify-around font-bold mt-2 mb-6">
+      <div className="flex w-full justify-around font-bold mt-10 mb-6">
         <span>Total</span>
         <span>U$ {getFormattedPrice(estimatedPrice)}&nbsp;</span>
       </div>
