@@ -6,18 +6,31 @@ type ImageFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   name: string;
   id: string;
+  defaultValue?: string | null;
+  onFileSelect?: (file: File | null) => void;
 };
 
 const MAX_SIZE = 3 * 1024 * 1024;
 
-const ImageField = ({ id, label, name, ...rest }: ImageFieldProps) => {
+const ImageField = ({
+  id,
+  label,
+  defaultValue = null,
+  onFileSelect,
+  name,
+  ...rest
+}: ImageFieldProps) => {
   const inputId = id ?? name ?? "image-field";
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(defaultValue);
   const [exceededImageSize, setExceededImageSize] = useState(false);
 
   useEffect(() => {
+    setPreviewUrl(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
     return () => {
-      if (previewUrl) {
+      if (previewUrl && previewUrl.startsWith("blob:")) {
         URL.revokeObjectURL(previewUrl);
       }
     };
@@ -27,22 +40,37 @@ const ImageField = ({ id, label, name, ...rest }: ImageFieldProps) => {
     const file = e.target.files?.[0] ?? null;
 
     if (!file) {
-      setPreviewUrl(null);
       setExceededImageSize(false);
+      onFileSelect?.(null);
+      setPreviewUrl(defaultValue);
       return;
     }
 
-    setExceededImageSize(file.size > MAX_SIZE);
-    
+    if (file.size > MAX_SIZE) {
+      setExceededImageSize(true);
+      onFileSelect?.(null);
+      return;
+    }
+
+    setExceededImageSize(false);
+
+    if (previewUrl && previewUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
     const url = URL.createObjectURL(file);
-    setPreviewUrl(url); 
+    setPreviewUrl(url);
+    onFileSelect?.(file);
   };
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <label htmlFor={inputId} className="cursor-pointer flex flex-col items-center">
+      <label
+        htmlFor={inputId}
+        className="cursor-pointer flex flex-col items-center"
+      >
         <CustomImage
-          src={previewUrl ?? "/default-profile.jpg"}
+          src={previewUrl ?? "/default-image.png"}
           width={100}
           height={100}
           alt="Profile picture"
