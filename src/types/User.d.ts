@@ -9,6 +9,7 @@ export type User = {
   role: Role;
   password?: string;
   avatar: string | null;
+  image?: string | null;
   lastReservation?: Reservation;
   createdAt: string;
   updatedAt: string;

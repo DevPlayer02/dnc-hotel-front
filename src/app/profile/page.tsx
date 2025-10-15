@@ -6,6 +6,8 @@ import DetailRow from "@/components/DetailListItem/DetailRow";
 import Link from "@/components/Link";
 import { Reservation } from "@/types/Reservation";
 import DetailListItem from "@/components/DetailListItem";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 type RecentReservationProps = {
   reservation?: Reservation;
@@ -33,6 +35,9 @@ const RecentReservation = ({ reservation }: RecentReservationProps) => {
 };
 
 const ProfilePage = async () => {
+  const session = await getServerSession();
+  if (!session?.user) redirect("/login");
+  
   const user = (await getProfile()) as User;
   console.log({ user });
   return (

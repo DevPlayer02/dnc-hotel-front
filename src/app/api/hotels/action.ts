@@ -1,3 +1,5 @@
+"use server"
+
 import axios from "@/api";
 import { Hotel, HotelPagination } from "@/types/Hotel";
 import { getServerSession } from "next-auth";
