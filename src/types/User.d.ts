@@ -10,7 +10,11 @@ export type User = {
   password?: string;
   avatar: string | null;
   image?: string | null;
-  lastReservation?: Reservation;
   createdAt: string;
   updatedAt: string;
 };
+
+export type UserProfile = User & {
+  lastReservation?: Reservation;
+  hotels?: Hotel[]
+}
