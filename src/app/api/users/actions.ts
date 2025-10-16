@@ -6,10 +6,10 @@ import { redirect } from "next/navigation";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { decryptToken } from "@/helpers/decryptToken";
 import { getReservationsByUser } from "../reservations/actions";
-import { Reservation } from "@/types/Reservation";
-import { User } from "@/types/User";
+import { User, UserProfile } from "@/types/User";
+import { getHotelByOwner } from "../hotels/action";
 
-export async function getProfile() {
+export async function getProfile(): Promise<UserProfile> {
   const session = await getServerSession(authOptions);
   const accessToken = session?.user?.access_token;
 
@@ -17,17 +17,28 @@ export async function getProfile() {
 
   const { id } = decryptToken(accessToken);
 
-  const { data } = await axios.get(`/users/${id}`, {
+  const { data } = await axios.get<User>(`/users/${id}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
 
-  const [reservation] = await getReservationsByUser();
+  if (data.role === 'ADMIN') {
+    const hotels = await getHotelByOwner();
 
-  if (reservation) {
-    return { ...(data as Reservation), lastReservation: reservation };
+    if (hotels) {
+      return { ...data, hotels}
+    }
+
+    return data;
+  } else {
+    const [reservation] = await getReservationsByUser();
+  
+    if (reservation) {
+      return { ...(data), lastReservation: reservation };
+    }
+  
+    return data;
   }
 
-  return data;
 }
 
 export async function updateProfile(prevState: any ,formData: FormData): Promise<User> {

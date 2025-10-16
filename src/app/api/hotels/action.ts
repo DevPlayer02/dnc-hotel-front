@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import axios from "@/api";
 import { Hotel, HotelPagination } from "@/types/Hotel";
@@ -33,4 +33,15 @@ export async function getHotelDetail(id: number): Promise<Hotel> {
   });
 
   return data as Hotel;
+}
+
+export async function getHotelByOwner(): Promise<Hotel[]> {
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.user?.access_token;
+
+  const { data } = await axios.get("/hotels/owner", {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  return data;
 }

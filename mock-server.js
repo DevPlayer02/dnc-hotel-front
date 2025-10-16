@@ -94,6 +94,12 @@ app.get('/hotels', (req, res) => {
   })
 });
 
+app.get('/hotels/owner', (req, res) => {
+  const hotels = app.db.get('hotels').value();
+
+  res.status(200).jsonp(hotels)
+});
+
 app.post('/reservations', (req, res) => { 
   res.status(201).jsonp({
     id: 1,

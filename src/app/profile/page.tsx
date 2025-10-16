@@ -8,9 +8,15 @@ import { Reservation } from "@/types/Reservation";
 import DetailListItem from "@/components/DetailListItem";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
+import { Hotel } from "@/types/Hotel";
+import HotelListItem from "@/components/HotelListItem";
 
 type RecentReservationProps = {
   reservation?: Reservation;
+};
+
+type MyHotelsProps = {
+  hotels?: Hotel[];
 };
 
 const RecentReservation = ({ reservation }: RecentReservationProps) => {
@@ -34,20 +40,49 @@ const RecentReservation = ({ reservation }: RecentReservationProps) => {
   );
 };
 
+const MyHotels = ({ hotels }: MyHotelsProps) => {
+  if (!hotels) {
+    return <div className="mt-10 w-full text-center">No properties</div>;
+  }
+
+  return (
+    <>
+      <div className="my-10">
+        {hotels.splice(0, 2).map((hotel) => (
+          <div className="mt-6" key={hotel.id}>
+            <HotelListItem hotel={hotel} />
+          </div>
+        ))}
+      </div>
+      <Link href="/my-properties" className="block text-center w-full">
+        View all properties
+      </Link>
+    </>
+  );
+};
+
 const ProfilePage = async () => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
-  
+
   const user = (await getProfile()) as User;
-  console.log({ user });
+
+  const asideContainer =
+    user.role === "USER"
+      ? {
+          title: "Most recent reservation",
+          children: <RecentReservation reservation={user.lastReservation} />,
+        }
+      : {
+          title: "My properties",
+          children: <MyHotels hotels={user.hotels} />,
+        };
+
   return (
     <DetailPage
       title="My profile"
       previousPage="/"
-      asideContainer={{
-        title: "Most recent reservation",
-        children: <RecentReservation reservation={user.lastReservation} />,
-      }}
+      asideContainer={asideContainer}
     >
       <div className="mt-4 flex flex-col justify-center items-center">
         <CustomImage
