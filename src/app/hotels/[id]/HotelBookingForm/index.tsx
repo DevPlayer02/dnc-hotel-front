@@ -77,7 +77,7 @@ const HotelBookingForm = ({ hotel }: HotelBookingFormProps) => {
       {state.error && (
         <Alert type="danger">{ state.message }</Alert> 
       )}
-      <Button appearance="primary" type="submit" disabled={false} className="mt-2 block cursor-pointer">Book now</Button>
+      <Button appearance="primary" type="submit" disabled={false} className="mt-2 block">Book now</Button>
     </form>
   );
 };
