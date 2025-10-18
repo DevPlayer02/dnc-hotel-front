@@ -10,7 +10,7 @@ type ImageFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   onFileSelect?: (file: File | null) => void;
 };
 
-const MAX_SIZE = 3 * 1024 * 1024;
+const MAX_SIZE = 800 * 1024;
 
 const ImageField = ({
   id,

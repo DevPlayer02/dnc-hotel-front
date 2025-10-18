@@ -37,7 +37,7 @@ const HotelListItem = ({ hotel }: HotelListItemProps) => {
           />
           <DetailRow
             title="Price:"
-            description={getFormattedPrice(hotel.price)}
+            description={`U$ ${getFormattedPrice(hotel.price)}`}
             className="mb-1"
           />
         </div>

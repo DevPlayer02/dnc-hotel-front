@@ -1,24 +1,23 @@
-"use server";
-
+import HotelForm from "@/components/HotelForm";
 import Link from "@/components/Link";
-import UserForm from "@/components/UserForm";
-import { User } from "@/types/User";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-const EditProfilePage = async () => {
+const RegisterHotelPage = async () => {
   const session = await getServerSession();
-  if (!session?.user) redirect("/login");
+  if (!session) {
+    redirect("/login");
+  }
 
   return (
     <section className="max-w-96 w-full flex justify-center items-center flex-col py-4 px-6 border border-light-grey-500 rounded-2xl">
-      <span>Edit profile</span>
-      <UserForm user={session.user as User} />
-      <Link href="/profile" className="mt-3">
-        Back
+      <span className="mb-4"> New Properties </span>
+      <HotelForm />
+      <Link href="/my-properties" className="mt-3 text-red-500">
+        Cancel
       </Link>
     </section>
   );
 };
 
-export default EditProfilePage;
+export default RegisterHotelPage;

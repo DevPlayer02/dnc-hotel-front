@@ -9,8 +9,7 @@ import React from "react";
 const initialState = { message: "" };
 
 const ForgotPassword = () => {
-   const [state, formAction, isPending] = React.useActionState(forgotPassword, initialState);
-
+  const [state, formAction, isPending] = React.useActionState(forgotPassword, initialState);
 
   return (
     <form

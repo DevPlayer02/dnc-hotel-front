@@ -52,7 +52,7 @@ export default function LoginPage() {
           className="mt-3"
           required
         />
-        <Button appearance="primary" type="submit" className="mt-3 cursor-pointer">
+        <Button appearance="primary" type="submit" className="mt-3">
           Login
         </Button>
       </form>
