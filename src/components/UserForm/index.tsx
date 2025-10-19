@@ -25,7 +25,7 @@ const UserForm = ({ user }: UserFormProps) => {
   const filename = user?.image;
   const srcUrl = filename
     ? `${base}/uploads/${encodeURIComponent(filename)}`
-    : "/no-hotel.jpg";
+    : "/default-profile.jpg";
   
   console.log({user})
   return (
