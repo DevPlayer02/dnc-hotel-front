@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Reservation } from "@/types/Reservation";
 import { getHotelDetail } from "../hotels/action";
+import { Hotel } from "@/types/Hotel";
 
 export async function reserveHotelById(prevState: any, formData: FormData) {
   let reservationId;
@@ -72,6 +73,30 @@ export async function getReservationsByUser(): Promise<Reservation[]> {
       const hotel = await getHotelDetail(reservation.hotelId);
       return { ...reservation, hotel };
     }));
+
+    return reservations;
+  }
+
+  return data as Reservation[];
+}
+
+export async function getReservationsByHotel(hotel: Hotel): Promise<Reservation[]> { 
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.user?.access_token;
+
+  if (!accessToken) redirect("/login");
+
+  console.log("HotelID ---->>>", {id: hotel.id})
+  const { data } = await axios.get(`/reservations/hotel/${hotel.id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  
+  if (data.lenght) {
+    const reservations = data.map((reservation: Reservation) => {
+      return { ...reservation, hotel };
+    });
 
     return reservations;
   }

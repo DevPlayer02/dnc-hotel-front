@@ -108,6 +108,20 @@ app.post('/hotels', (req, res) => {
   })
 })
 
+app.patch('/hotels/:id', (req, res) => {
+  res.status(201).jsonp({
+    "id": 6,
+    "name": "Hotel Hashira",
+    "description": "Hotel brabo",
+    "address": "Rua da sacanagem, 321",
+    "image": null,
+    "price": 480,
+    "ownerId": 1,
+    "createdAt": "2025-10-18T21:42:49.541Z",
+    "updatedAt": "2025-10-18T21:42:49.541Z"
+  })
+})
+
 app.patch('/hotels/image/:id', (req, res) => {
   res.status(200).jsonp({
     "id": 6,
