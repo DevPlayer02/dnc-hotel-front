@@ -9,8 +9,9 @@ import { getFormattedPrice } from "@/helpers/format/money";
 import { DetailPageProps } from "@/types/DetailPage";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import BackButton from "./BackButton";
 
-const DetailsreservationPage = async ({ params }: DetailPageProps) => {
+const DetailsReservationPage = async ({ params }: DetailPageProps) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
@@ -25,7 +26,7 @@ const DetailsreservationPage = async ({ params }: DetailPageProps) => {
         src: reservation.hotel.image ?? "/no-hotel.jpg",
         alt: `Photo of the ${reservation.hotel.name}`,
       }}
-      previousPage="/reservations"
+      backButton={<BackButton reservation={reservation} className="" textButton="Back"/>}
       asideContainer={{
         title: "Reservation Info",
         children: (
@@ -55,12 +56,12 @@ const DetailsreservationPage = async ({ params }: DetailPageProps) => {
               description={getFormattedDate(reservation.checkOut)}
               className="mt-2"
             />
-            <Link href="/reservations" className="block w-full text-center mt-10">Back to my stays</Link>
+            <BackButton reservation={reservation} />
           </div>
         ),
       }}
     >
-      <UserDetail user={reservation.hotel.owner} />
+      <UserDetail reservation={reservation} />
       <div className="mt-4 flex flex-col">
         <h3 className="font-bold text-2xl mt-4">Address</h3>
         <span className="mt-2">{reservation.hotel.address}</span>
@@ -73,4 +74,4 @@ const DetailsreservationPage = async ({ params }: DetailPageProps) => {
   );
 };
 
-export default DetailsreservationPage;
+export default DetailsReservationPage;

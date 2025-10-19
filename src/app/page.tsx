@@ -53,7 +53,7 @@ export default async function Home({ searchParams }: HomeProps) {
                 <h3 className="font-bold mt-0">{hotel.name}</h3>
                 <span className="mt-2"> <b>Host:</b> {hotel.owner.name} </span>
                 <span className="mt-2">
-                  <b>U$ {getFormattedPrice(hotel.price)}</b> night
+                  <b>U$ {getFormattedPrice(hotel.price)}</b> / dairy
                 </span>
               </div>
             </article>

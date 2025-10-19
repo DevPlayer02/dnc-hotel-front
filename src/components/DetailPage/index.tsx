@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Link from "../Link";
 import CustomImage from "../CustomImage";
+import BackButton from "@/app/reservations/[id]/BackButton";
 
 type ImageProps = {
   src: string | null;
@@ -14,8 +15,7 @@ type AsideContainerProps = {
 
 type DetailPageProps = {
   previousPage?: string;
-  additionalLink?: string;
-  additionalLinkText?: string;
+  backButton: ReactNode;
   children: ReactNode;
   image?: ImageProps;
   title: string;
@@ -25,8 +25,7 @@ type DetailPageProps = {
 
 const DetailPage = ({
   previousPage = "/",
-  additionalLink,
-  additionalLinkText,
+  backButton,
   children,
   image,
   title,
@@ -36,10 +35,7 @@ const DetailPage = ({
   return (
     <div className={`flex flex-col w-full px-10 sm:px-20 md:px-32 lg:px-56 xl:px-72 ${className || ''}`}>
       <section className="flex justify-between pt-20 pb-4">
-        <Link href={previousPage}> Back </Link>
-        {additionalLink && additionalLinkText && (
-        <Link href={additionalLink}> {additionalLinkText} </Link>
-        )}
+        {backButton ? backButton : <Link href={previousPage}> Back </Link>}
       </section>
       {image && (
         <section className="relative w-full h-80 mt-2"> 

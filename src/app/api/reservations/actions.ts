@@ -4,7 +4,7 @@ import axios from "@/api";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { Reservation } from "@/types/Reservation";
+import { Reservation, ReservationStatus } from "@/types/Reservation";
 import { getHotelDetail } from "../hotels/action";
 import { Hotel } from "@/types/Hotel";
 
@@ -86,7 +86,6 @@ export async function getReservationsByHotel(hotel: Hotel): Promise<Reservation[
 
   if (!accessToken) redirect("/login");
 
-  console.log("HotelID ---->>>", {id: hotel.id})
   const { data } = await axios.get(`/reservations/hotel/${hotel.id}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -102,4 +101,19 @@ export async function getReservationsByHotel(hotel: Hotel): Promise<Reservation[
   }
 
   return data as Reservation[];
+}
+
+export async function updateReservationStatus(reservationId: number, status: ReservationStatus) {
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.user?.access_token;
+
+  if (!accessToken) redirect("/login");
+
+  const { data } = await axios.patch(`/reservations/${reservationId}`, { status }, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+
+  return data;
 }
