@@ -1,8 +1,8 @@
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 
 type LinkProps = NextLinkProps & {
-  children: ReactElement | string;
+  children: ReactNode;
   className?: string;
 };
 
