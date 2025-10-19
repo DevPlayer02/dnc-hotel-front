@@ -161,5 +161,10 @@ app.get('/reservations/user', (req, res) => {
   res.status(200).jsonp(reservations)
 })
 
+app.get('/reservations/hotel/:id', (req, res) => {
+  const reservations = app.db.get('reservations').value();
+  res.status(200).jsonp(reservations)
+})
+
 app.use(router);
 app.listen(3000);
