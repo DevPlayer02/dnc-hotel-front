@@ -20,8 +20,7 @@ const TextField = ({
   return (
     <div className={`w-full ${className}`}>
       <label htmlFor={id} className="sr-only">
-        {" "}
-        {label}{" "}
+        {label}
       </label>
       <input
         id={id}

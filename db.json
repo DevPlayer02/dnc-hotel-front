@@ -136,6 +136,51 @@
         "createdAt": "2025-10-06T22:21:01.892Z",
         "updatedAt": "2025-10-06T22:21:01.892Z"
       }
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 4,
+      "avatar": null,
+      "createdAt": "2025-10-20T23:05:27.591Z"
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 5,
+      "avatar": null,
+      "createdAt": "2025-10-20T23:08:14.368Z"
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 6,
+      "avatar": null,
+      "createdAt": "2025-10-20T23:08:58.365Z"
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 7,
+      "avatar": null,
+      "createdAt": "2025-10-20T23:11:14.725Z"
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 8,
+      "avatar": null,
+      "createdAt": "2025-10-20T23:43:56.128Z"
     }
   ],
   "hotels": [

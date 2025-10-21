@@ -17,7 +17,7 @@ const HotelDetail = async ({ params }: DetailPageProps) => {
 
   return (
     <DetailPage
-      previousPage="/"
+      backButton=""
       title={hotel.name}
       image={{
         src: hotel.image ?? "/no-hotel.jpg",
