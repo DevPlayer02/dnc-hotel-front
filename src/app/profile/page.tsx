@@ -81,7 +81,7 @@ const ProfilePage = async () => {
   return (
     <DetailPage
       title="My profile"
-      backButton="/"
+      backButton=""
       asideContainer={asideContainer}
     >
       <div className="mt-4 flex flex-col justify-center items-center">
