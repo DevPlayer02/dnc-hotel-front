@@ -5,13 +5,14 @@ import { Hotel, HotelPagination } from "@/types/Hotel";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/action";
 import { redirect } from "next/navigation";
+import type { State } from "@/components/HotelForm";
 
 export async function getHotels(
   page: number,
   limit: number
 ): Promise<HotelPagination> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) throw new Error("Access token not found in server session");
 
@@ -25,7 +26,7 @@ export async function getHotels(
 
 export async function getHotelDetail(id: number): Promise<Hotel> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   const { data } = await axios.get(`/hotels/${id}`, {
     headers: {
@@ -38,7 +39,7 @@ export async function getHotelDetail(id: number): Promise<Hotel> {
 
 export async function getHotelByOwner(): Promise<Hotel[]> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   const { data } = await axios.get("/hotels/owner", {
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -47,9 +48,9 @@ export async function getHotelByOwner(): Promise<Hotel[]> {
   return data as Hotel[];
 }
 
-export async function createHotel(prevState: unknown, formData: FormData) {
+export async function createHotel(prevState: State | undefined, formData: FormData): Promise<State> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   try {
     const image = formData.get("image");
@@ -75,7 +76,7 @@ export async function createHotel(prevState: unknown, formData: FormData) {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 
-    const hotelId = data.id;
+    const hotelId = (data as { id: number }).id;
 
     // Ensure image is a File before accessing size and appending
     if (image instanceof File && image.size) {
@@ -88,7 +89,7 @@ export async function createHotel(prevState: unknown, formData: FormData) {
     }
   } catch (error) {
     console.log("Error:", error);
-    return { ...prevState, message: "" };
+    return { ...(typeof prevState === "object" && prevState !== null ? prevState : {}), message: "", error: false };
   }
 
   redirect("/my-properties");
@@ -96,7 +97,7 @@ export async function createHotel(prevState: unknown, formData: FormData) {
 
 export async function getHotelById(id: number): Promise<Hotel> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   const { data } = await axios.get(`/hotels/${id}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -107,7 +108,7 @@ export async function getHotelById(id: number): Promise<Hotel> {
 
 export async function updateHotel(prevState: unknown, formData: FormData) {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+    const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   try {
     const image = formData.get("image") as File;
@@ -134,7 +135,7 @@ export async function updateHotel(prevState: unknown, formData: FormData) {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     
-    const hotelId = data.id;
+    const hotelId = (data as { id: number }).id;
     
     //Ensure image is a File before accessing size and appending
     if (image instanceof File && image.size) {
@@ -148,7 +149,7 @@ export async function updateHotel(prevState: unknown, formData: FormData) {
 
   } catch (error) {
     console.log("Error:", error);
-    return { ...prevState, message: "It was not possible to register the hotel.", error: true };
+    return { ...(typeof prevState === "object" && prevState !== null ? prevState : {}), message: "It was not possible to register the hotel.", error: true };
   }
   
   redirect("/my-properties");

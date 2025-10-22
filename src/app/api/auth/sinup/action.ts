@@ -1,12 +1,10 @@
 "use server";
 
+import { ActionResponse } from "@/types/api";
 import axios from "@/api";
 import { redirect } from "next/navigation";
 
-export async function signup(
-  prevState: Record<string, unknown>,
-  formData: FormData
-) {
+export async function signup(prevState: ActionResponse | undefined, formData: FormData): Promise<ActionResponse>{
   const payload = {
     name: formData.get("name"),
     email: formData.get("email"),

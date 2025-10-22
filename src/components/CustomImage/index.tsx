@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { normalizeImageSrc, UploadPathKey, SrcType } from "@/helpers/format/image";
 
-type SrcType = string | Record<string, unknown> | null | undefined;
-
 type Props = {
   src?: SrcType;
   hotel?: Record<string, unknown>;
@@ -22,10 +20,15 @@ type Props = {
 
 function extractHotelImage(hotel?: Record<string, unknown>): SrcType {
   if (!hotel || typeof hotel !== "object") return null;
-  if (hotel.image) return hotel.image;
+  if (hotel.image && (typeof hotel.image === "string" || hotel.image === null)) return hotel.image as SrcType;
   if (Array.isArray(hotel.images) && hotel.images.length)
     return hotel.images[0];
-  if (hotel.owner && hotel.owner.avatar) return hotel.owner.avatar;
+  if (
+    hotel.owner &&
+    typeof hotel.owner === "object" &&
+    "avatar" in hotel.owner
+  )
+    return (hotel.owner as { avatar?: SrcType }).avatar;
   return null;
 }
 

@@ -11,7 +11,7 @@ import { Hotel } from "@/types/Hotel";
 export async function reserveHotelById(prevState: unknown, formData: FormData) {
   let reservationId;
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 
@@ -27,11 +27,12 @@ export async function reserveHotelById(prevState: unknown, formData: FormData) {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    reservationId = data.id;
+    const responseData = data as { id: number };
+    reservationId = responseData.id;
   } catch (error) {
     console.log({error})
     return {
-      ...prevState,
+      ...(typeof prevState === "object" && prevState !== null ? prevState : {}),
       message: "Failed to create reservation",
       error: true,
     };
@@ -41,7 +42,7 @@ export async function reserveHotelById(prevState: unknown, formData: FormData) {
 
 export async function getReservationById(id: number): Promise<Reservation> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 
@@ -51,14 +52,15 @@ export async function getReservationById(id: number): Promise<Reservation> {
     },
   });
 
-  const hotel = await getHotelDetail(data.hotelId);
+  const reservationData = data as Reservation;
+  const hotel = await getHotelDetail(reservationData.hotelId);
 
-  return { ...data, hotel};
+  return { ...reservationData, hotel};
 }
 
 export async function getReservationsByUser(): Promise<Reservation[]> { 
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 
@@ -67,9 +69,9 @@ export async function getReservationsByUser(): Promise<Reservation[]> {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  
-  if (data.lenght) {
-    const reservations = await Promise.all(data.map(async (reservation: Reservation) => {
+  const reservationsData = data as Reservation[];
+  if (reservationsData.length) {
+    const reservations = await Promise.all(reservationsData.map(async (reservation: Reservation) => {
       const hotel = await getHotelDetail(reservation.hotelId);
       return { ...reservation, hotel };
     }));
@@ -77,12 +79,12 @@ export async function getReservationsByUser(): Promise<Reservation[]> {
     return reservations;
   }
 
-  return data as Reservation[];
+  return reservationsData;
 }
 
 export async function getReservationsByHotel(hotel: Hotel): Promise<Reservation[]> { 
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 
@@ -91,21 +93,22 @@ export async function getReservationsByHotel(hotel: Hotel): Promise<Reservation[
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  
-  if (data.lenght) {
-    const reservations = data.map((reservation: Reservation) => {
+
+  const reservationsData = data as Reservation[];
+  if (reservationsData.length) {
+    const reservations = reservationsData.map((reservation: Reservation) => {
       return { ...reservation, hotel };
     });
 
     return reservations;
   }
 
-  return data as Reservation[];
+  return reservationsData;
 }
 
 export async function updateReservationStatus(reservationId: number, status: ReservationStatus) {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 

@@ -49,6 +49,7 @@ export const authOptions: NextAuthOptions = {
 
           return {
             ...user,
+            id: String(user.id),
             access_token,
             image: user.avatar,
           };

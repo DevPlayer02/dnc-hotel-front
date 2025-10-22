@@ -6,12 +6,13 @@ import { redirect } from "next/navigation";
 import { authOptions } from "../auth/[...nextauth]/action";
 import { decryptToken } from "@/helpers/decryptToken";
 import { getReservationsByUser } from "../reservations/actions";
-import { User, UserProfile } from "@/types/User";
+import { ActionResponse } from "@/types/api";
+import { User } from "@/types/User";
 import { getHotelByOwner } from "../hotels/action";
 
-export async function getProfile(): Promise<UserProfile> {
+export async function getProfile(): Promise<User> {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 
@@ -41,9 +42,9 @@ export async function getProfile(): Promise<UserProfile> {
 
 }
 
-export async function updateProfile(prevState: unknown ,formData: FormData): Promise<User> {
+export async function updateProfile(prevState: ActionResponse | undefined, formData: FormData): Promise<ActionResponse>  {
   const session = await getServerSession(authOptions);
-  const accessToken = session?.user?.access_token;
+const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 

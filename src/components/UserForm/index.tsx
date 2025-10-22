@@ -10,6 +10,7 @@ import { useActionState } from "react";
 import { signup } from "@/app/api/auth/sinup/action";
 import { User } from "@/types/User";
 import { updateProfile } from "@/app/api/users/actions";
+import { ActionResponse } from "@/types/api";
 
 const initialState = { error: false, message: "" };
 
@@ -18,7 +19,7 @@ type UserFormProps = {
 };
 
 const UserForm = ({ user }: UserFormProps) => {
-  const action = user ? updateProfile : signup;
+   const action = (user ? updateProfile : signup) as (state: ActionResponse | undefined, payload: FormData) => Promise<ActionResponse>;
   const [state, formAction] = useActionState(action, initialState);
 
   const base = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");

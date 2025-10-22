@@ -8,10 +8,15 @@ import Alert from "@/components/Alert";
 import PasswordFields from "@/app/register/PasswordFields";
 import React from "react";
 
-const initialState = { message: "" };
+type FormState = {
+  message?: string;
+  success?: boolean;
+};
+
+const initialState: FormState = { message: "" };
 
 const ResetPassword = () => {
-    const [state, formAction, isPending] = React.useActionState(resetPassword, initialState);
+  const [state, formAction, isPending] = React.useActionState<FormState, FormData>(resetPassword, initialState);
 
   return (
     <form

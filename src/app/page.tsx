@@ -7,7 +7,7 @@ import Pagination from "@/components/Pagination";
 import CustomImage from "@/components/CustomImage";
 
 type HomeProps = {
-  searchParams: Promise<{ slug: string }>;
+  searchParams: Promise<{ slug: string; page?: string | string[] }>;
 };
 
 const LIMIT = 8;
@@ -22,7 +22,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const rawPage = Array.isArray(sp?.page) ? sp.page[0] : sp?.page;
   const currentPage = Number(rawPage ?? 1);
 
-  const { data: hotels, per_page, total } = await getHotels(currentPage, LIMIT);
+  const { data: hotels, limit, total } = await getHotels(currentPage, LIMIT);
 
   return (
     <div>
@@ -56,7 +56,7 @@ export default async function Home({ searchParams }: HomeProps) {
         ))}
       </section>
       <section className="flex justify-center mt-4 mb-8">
-        <Pagination totalPages={Math.ceil(total / per_page)} currentPage={currentPage} destination="/"/>
+        <Pagination totalPages={Math.ceil(total / limit)} currentPage={currentPage} destination="/"/>
       </section>
     </div>
   );

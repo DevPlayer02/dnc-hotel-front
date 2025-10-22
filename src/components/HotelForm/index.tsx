@@ -9,7 +9,8 @@ import { useActionState } from "react";
 import Alert from "../Alert";
 import { Hotel } from "@/types/Hotel";
 
-const initialState = { message: "", error: false };
+export type State = { message: string; error: boolean };
+const initialState: State = { message: "", error: false };
 
 type HotelFormProps = {
   hotel?: Hotel;
@@ -17,7 +18,7 @@ type HotelFormProps = {
 
 const HotelForm = ({ hotel }: HotelFormProps) => {
   const action = hotel ? updateHotel : createHotel
-  const [state, formAction] = useActionState(action, initialState);
+  const [state, formAction] = useActionState<State, FormData>(action, initialState);
 
   const base = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
   const filename = hotel?.image;

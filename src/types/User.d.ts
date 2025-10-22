@@ -12,9 +12,6 @@ export type User = {
   image?: string | null;
   createdAt: string;
   updatedAt: string;
-};
-
-export type UserProfile = User & {
   lastReservation?: Reservation;
   hotels?: Hotel[]
-}
+};

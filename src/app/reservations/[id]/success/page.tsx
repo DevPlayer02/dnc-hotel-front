@@ -4,15 +4,23 @@ import UserDetail from "@/components/UserDetail/server";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-type ParamsProps = Promise<{ slug: string[] }>;
+type DetailsProps = {
+  params?: Promise<{ id: string }>;
+};
 
-const ReservationRequestPage = async ({ params }: { params: ParamsProps}) => {
+const ReservationRequestPage = async ({ params }: DetailsProps) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-    const { id } = await params
-    const reservationId = Number(id);
-    const reservation = await getReservationById(reservationId);
+  const resolvedParams = params ? await params : undefined;
+  const idStr = resolvedParams?.id;
+
+  if (!idStr) {
+    return <div>ID invalid or not found</div>;
+  }
+
+  const reservationId = Number(idStr);
+  const reservation = await getReservationById(reservationId);
   const { hotel } = reservation;
 
   return (

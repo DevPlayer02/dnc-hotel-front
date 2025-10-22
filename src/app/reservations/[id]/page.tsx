@@ -1,7 +1,7 @@
 import { getReservationById } from "@/app/api/reservations/actions";
 import DetailRow from "@/components/DetailListItem/DetailRow";
 import DetailPage from "@/components/DetailPage";
-import UserDetail from "@/components/UserDetail/server";
+import UserDetail from "@/components/UserDetail/index";
 import { getFormattedStatus } from "@/helpers/format/dictionary/status";
 import { getFormattedDate } from "@/helpers/format/date";
 import { getFormattedPrice } from "@/helpers/format/money";
@@ -9,13 +9,22 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import BackButton from "./BackButton";
 
-type ParamsProps = Promise<{ slug: string[] }>;
+type DetailsProps = {
+  params?: Promise<{ id: string }>;
+};
 
-const DetailsReservationPage = async ({ params }: { params: ParamsProps}) => {
+export default async function DetailsReservationPage({ params }: DetailsProps) {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-  const reservationId = Number(params.id);
+  const resolvedParams = params ? await params : undefined;
+  const idStr = resolvedParams?.id;
+
+  if (!idStr) {
+    return <div>ID invalid or not found</div>;
+  }
+
+  const reservationId = Number(idStr);
   const reservation = await getReservationById(reservationId);
   console.log({ reservation });
 
@@ -26,7 +35,9 @@ const DetailsReservationPage = async ({ params }: { params: ParamsProps}) => {
         src: reservation.hotel.image ?? "/no-hotel.jpg",
         alt: `Photo of the ${reservation.hotel.name}`,
       }}
-      backButton={<BackButton reservation={reservation} className="" textButton="Back"/>}
+      backButton={
+        <BackButton reservation={reservation} className="" textButton="Back" />
+      }
       asideContainer={{
         title: "Reservation Info",
         children: (
@@ -43,7 +54,9 @@ const DetailsReservationPage = async ({ params }: { params: ParamsProps}) => {
             />
             <DetailRow
               title="Total"
-              description={`U$ ${getFormattedPrice(Math.abs(reservation.total))}`}
+              description={`U$ ${getFormattedPrice(
+                Math.abs(reservation.total)
+              )}`}
               className="mt-2"
             />
             <DetailRow
@@ -72,6 +85,4 @@ const DetailsReservationPage = async ({ params }: { params: ParamsProps}) => {
       </div>
     </DetailPage>
   );
-};
-
-export default DetailsReservationPage;
+}

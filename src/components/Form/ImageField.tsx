@@ -15,7 +15,7 @@ const MAX_SIZE = 800 * 1024;
 const ImageField = ({
   id,
   label,
-  defaultValue = null,
+  defaultValue = "",
   onFileSelect,
   name,
   ...rest
