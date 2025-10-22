@@ -1,10 +1,17 @@
 import TextField from "./TextField";
-import { NumericFormat } from "react-number-format";
+import { NumericFormat, NumericFormatProps } from "react-number-format";
 
-const MaskField = ({ label, error, ...props }: any) => {
+
+type MaskFieldProps = Omit<NumericFormatProps<HTMLInputElement>, "customInput"> & {
+  label: string;
+  error?: string;
+    props: string;
+};
+
+const MaskField: React.FC<MaskFieldProps> = ({ label, error, ...props }: MaskFieldProps) => {
     return (
         <NumericFormat
-            customInput={TextField}
+            customInput={TextField as React.ComponentType<any>}
             label={label}
             error={error}
             prefix="U$"

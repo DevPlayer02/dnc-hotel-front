@@ -2,11 +2,19 @@
 import axios from "@/api";
 import { redirect } from "next/navigation";
 
-export async function forgotPassword(prevState: any, formData: FormData) {
+interface FormState {
+  message?: string;
+  success?: boolean;
+  result?: Promise<FormState>;
+}
+
+export async function forgotPassword(prevState: FormState, formData: FormData) {
     try {
         const payload = { "email": formData.get('email') }
     
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { data } = await axios.post('/auth/forgot-password', payload);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return { ...prevState, message: 'Error sending the email' }
     }
@@ -14,7 +22,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
     redirect('/reset-password')    
 }
 
-export async function resetPassword(prevState: any, formData: FormData) {
+export async function resetPassword(prevState: FormState, formData: FormData) {
     try {
         const payload = {
             "token": formData.get('token'),
@@ -24,6 +32,7 @@ export async function resetPassword(prevState: any, formData: FormData) {
         const { data } = await axios.patch('/auth/reset-password', payload);
 
         return { success: true, result: data }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return { ...prevState, message: 'Error updating the password' }
     }

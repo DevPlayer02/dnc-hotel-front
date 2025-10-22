@@ -9,7 +9,8 @@ const ReservationRequestPage = async ({ params }: DetailPageProps) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-    const reservationId = Number(params.id);
+    const { id } = await params
+    const reservationId = Number(id);
     const reservation = await getReservationById(reservationId);
   const { hotel } = reservation;
 

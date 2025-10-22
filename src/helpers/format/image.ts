@@ -1,4 +1,4 @@
-type SrcType = string | Record<string, any> | null | undefined;
+type SrcType = string | Record<string, unknown> | null | undefined;
 
 function stripSlashStart(s: string): string { return s.replace(/^\/+/, ""); }
 function stripSlashEnd(s: string): string { return s.replace(/\/+$/, ""); }
@@ -47,7 +47,7 @@ export function normalizeImageSrc(input?: SrcType, options?: NormalizeOptions): 
   }
 
   if (typeof input === "object") {
-    const obj: Record<string, any> = input;
+    const obj: Record<string, unknown> = input;
     
     if (typeof obj.url === "string" && obj.url) return normalizeImageSrc(obj.url, options);
     if (typeof obj.src === "string" && obj.src) return normalizeImageSrc(obj.src, options);

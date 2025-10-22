@@ -5,9 +5,8 @@ type PaginationProps = {
   currentPage: number;
   totalPages: number;
   destination: string;
+  pages?: number[]; 
 };
-
-const pages = [1, 2, 3, 4, 5];
 
 const pagesStyles =
   "mx-1 flex items-center justify-center w-12 h-12 bg-white text-xl font-bold text-light-grey-800 border border-light-grey-300 rounded-lg hover:bg-snow-white";
@@ -47,7 +46,7 @@ const Pagination = ({
                   href={{ pathname: destination, query: { page } }}
                   className={styles}
                 >
-                  {page as any}
+                  {page as number}
                 </Link>
               </li>
             );

@@ -2,7 +2,6 @@ import Button from "@/components/Button";
 import CustomImage from "@/components/CustomImage";
 import Link from "@/components/Link";
 import { signOut, useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Header = () => {
@@ -17,9 +16,6 @@ const Header = () => {
       setShowMenu(false);
     });
   };
-
-  const pathname = usePathname();
-  const showProfileLink = pathname === "/";
 
   const base = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
   const filename = user?.avatar ?? "/default-profile.jpg";

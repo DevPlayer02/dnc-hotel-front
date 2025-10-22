@@ -9,8 +9,6 @@ type UserDetailProps = { reservation: Reservation };
 const UserDetail = ({ reservation }: UserDetailProps) => {
   const [showUserDetail, setShowUserDetail] = useState(false);
   const { data } = useSession();
-  const user =
-    data?.user?.role === "USER" ? reservation.hotel.owner : reservation.user;
 
   useEffect(() => {
     if (data?.user.role) {

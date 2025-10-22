@@ -42,6 +42,7 @@ export async function signup(
         };
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const uploadRes = await axios.post(uploadEndpoint, formDataAvatar, {
         headers: {
           Authorization: `Bearer ${access_token}`,

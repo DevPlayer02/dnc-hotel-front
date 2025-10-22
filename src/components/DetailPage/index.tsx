@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import Link from "../Link";
 import CustomImage from "../CustomImage";
-import BackButton from "@/app/reservations/[id]/BackButton";
 
 type ImageProps = {
   src: string | null;

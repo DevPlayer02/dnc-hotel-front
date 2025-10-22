@@ -181,6 +181,24 @@
       "id": 8,
       "avatar": null,
       "createdAt": "2025-10-20T23:43:56.128Z"
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 9,
+      "avatar": null,
+      "createdAt": "2025-10-22T00:16:36.109Z"
+    },
+    {
+      "name": "Test DNC",
+      "email": "test@dnc.com",
+      "password": "12345",
+      "role": "ADMIN",
+      "id": 10,
+      "avatar": null,
+      "createdAt": "2025-10-22T00:18:11.891Z"
     }
   ],
   "hotels": [

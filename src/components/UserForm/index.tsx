@@ -7,7 +7,7 @@ import TextField from "../Form/TextField";
 import RadioGroup from "../Form/RadioGroup";
 import Button from "../Button";
 import { useActionState } from "react";
-import { signup } from "@/app/api/auth/sinup/route";
+import { signup } from "@/app/api/auth/sinup/action";
 import { User } from "@/types/User";
 import { updateProfile } from "@/app/api/users/actions";
 

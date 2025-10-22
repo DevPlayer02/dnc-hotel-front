@@ -2,7 +2,7 @@
 import Button from "@/components/Button";
 import TextField from "@/components/Form/TextField";
 import Image from "next/image";
-import { forgotPassword } from "@/app/api/auth/password/route";
+import { forgotPassword } from "@/app/api/auth/password/action";
 import Alert from "@/components/Alert";
 import React from "react";
 
