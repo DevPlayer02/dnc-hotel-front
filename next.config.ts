@@ -5,13 +5,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
+        hostname: "dnc-hotel-production.up.railway.app",
         port: "3000",
         pathname: "/uploads-hotel/**",
       },
       {
         protocol: "http",
-        hostname: "localhost",
+        hostname: "dnc-hotel-production.up.railway.app",
         port: "3000",
         pathname: "/uploads/**",
       },
