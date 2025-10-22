@@ -6,13 +6,8 @@ import { getFormattedPrice } from "@/helpers/format/money";
 import Pagination from "@/components/Pagination";
 import CustomImage from "@/components/CustomImage";
 
-type SearchParams = {
-  page: string;
-  query: string;
-};
-
 type HomeProps = {
-  searchParams: SearchParams;
+  searchParams: Promise<{ slug: string }>;
 };
 
 const LIMIT = 8;
@@ -27,7 +22,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const rawPage = Array.isArray(sp?.page) ? sp.page[0] : sp?.page;
   const currentPage = Number(rawPage ?? 1);
 
-  const { data: hotels, per_page, page, total } = await getHotels(currentPage, LIMIT);
+  const { data: hotels, per_page, total } = await getHotels(currentPage, LIMIT);
 
   return (
     <div>

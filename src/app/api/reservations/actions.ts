@@ -3,12 +3,12 @@
 import axios from "@/api";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/action";
 import { Reservation, ReservationStatus } from "@/types/Reservation";
 import { getHotelDetail } from "../hotels/action";
 import { Hotel } from "@/types/Hotel";
 
-export async function reserveHotelById(prevState: any, formData: FormData) {
+export async function reserveHotelById(prevState: unknown, formData: FormData) {
   let reservationId;
   const session = await getServerSession(authOptions);
   const accessToken = session?.user?.access_token;

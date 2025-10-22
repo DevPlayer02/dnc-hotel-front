@@ -1,4 +1,4 @@
-type SrcType = string | Record<string, unknown> | null | undefined;
+export type SrcType = string | Record<string, unknown> | null | undefined;
 
 function stripSlashStart(s: string): string { return s.replace(/^\/+/, ""); }
 function stripSlashEnd(s: string): string { return s.replace(/\/+$/, ""); }

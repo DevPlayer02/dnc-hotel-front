@@ -1,14 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/jsx-no-comment-textnodes */
 "use client";
 import React, { useState, useEffect } from "react";
 import { normalizeImageSrc, UploadPathKey, SrcType } from "@/helpers/format/image";
 
-type SrcType = string | Record<string, any> | null | undefined;
+type SrcType = string | Record<string, unknown> | null | undefined;
 
 type Props = {
   src?: SrcType;
-  hotel?: Record<string, any>;
+  hotel?: Record<string, unknown>;
   alt: string;
   width?: number;
   height?: number;
@@ -22,7 +20,7 @@ type Props = {
   "src" | "alt" | "width" | "height"
 >;
 
-function extractHotelImage(hotel?: Record<string, any>): SrcType {
+function extractHotelImage(hotel?: Record<string, unknown>): SrcType {
   if (!hotel || typeof hotel !== "object") return null;
   if (hotel.image) return hotel.image;
   if (Array.isArray(hotel.images) && hotel.images.length)
@@ -41,7 +39,6 @@ export default function CustomImage({
   baseUrl,
   uploadsPath,
   placeholder,
-  unoptimized = false,
   ...rest
 }: Props) {
   
@@ -63,6 +60,7 @@ export default function CustomImage({
   }
   
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={currentSrc}
       alt={alt}

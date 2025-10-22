@@ -3,7 +3,7 @@
 import axios from "@/api";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/action";
 import { decryptToken } from "@/helpers/decryptToken";
 import { getReservationsByUser } from "../reservations/actions";
 import { User, UserProfile } from "@/types/User";
@@ -41,7 +41,7 @@ export async function getProfile(): Promise<UserProfile> {
 
 }
 
-export async function updateProfile(prevState: any ,formData: FormData): Promise<User> {
+export async function updateProfile(prevState: unknown ,formData: FormData): Promise<User> {
   const session = await getServerSession(authOptions);
   const accessToken = session?.user?.access_token;
 

@@ -11,7 +11,7 @@ type MaskFieldProps = Omit<NumericFormatProps<HTMLInputElement>, "customInput"> 
 const MaskField: React.FC<MaskFieldProps> = ({ label, error, ...props }: MaskFieldProps) => {
     return (
         <NumericFormat
-            customInput={TextField as React.ComponentType<any>}
+            customInput={TextField as React.ComponentType<unknown>}
             label={label}
             error={error}
             prefix="U$"

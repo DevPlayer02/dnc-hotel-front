@@ -30,7 +30,7 @@ const getNightsInHotel = (checkin: string | null, checkout: string | null) => {
 const initialState = {message: '', error: false}
 
 const HotelBookingForm = ({ hotel }: HotelBookingFormProps) => {
-  const [state, formAction, isPending] = useActionState(reserveHotelById, initialState)
+  const [state, formAction] = useActionState(reserveHotelById, initialState)
   const today = new Date().toISOString().substring(0, 10);
   const [checkinDate, setCheckinDate] = useState<string | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<string | null>(null);

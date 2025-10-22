@@ -5,14 +5,16 @@ import HotelBookingForm from "./HotelBookingForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import UserDetail from "@/components/UserDetail/server";
-import { DetailPageProps } from "@/types/DetailPage";
 
-const HotelDetail = async ({ params }: DetailPageProps) => {
+type ParamsProps = Promise<{ slug: string[] }>;
+
+const HotelDetail = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-  const { id } = await params;
-  const hotel = await getHotelDetail(Number(id));
+  const { slug }: {slug: string[]} = await params;
+  const hotelId = slug[1];
+  const hotel = await getHotelDetail(Number(hotelId));
   console.log(hotel);
 
   return (

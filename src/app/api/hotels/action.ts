@@ -3,7 +3,7 @@
 import axios from "@/api";
 import { Hotel, HotelPagination } from "@/types/Hotel";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/action";
 import { redirect } from "next/navigation";
 
 export async function getHotels(
@@ -47,7 +47,7 @@ export async function getHotelByOwner(): Promise<Hotel[]> {
   return data as Hotel[];
 }
 
-export async function createHotel(prevState: any, formData: FormData) {
+export async function createHotel(prevState: unknown, formData: FormData) {
   const session = await getServerSession(authOptions);
   const accessToken = session?.user?.access_token;
 
@@ -105,7 +105,7 @@ export async function getHotelById(id: number): Promise<Hotel> {
   return data as Hotel;
 }
 
-export async function updateHotel(prevState: any, formData: FormData) {
+export async function updateHotel(prevState: unknown, formData: FormData) {
   const session = await getServerSession(authOptions);
   const accessToken = session?.user?.access_token;
 

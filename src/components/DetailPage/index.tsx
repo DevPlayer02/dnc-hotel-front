@@ -12,7 +12,7 @@ type AsideContainerProps = {
   children: ReactNode;
 };
 
-type DetailPageProps = {
+type DetailProps = {
   previousPage?: string;
   backButton: ReactNode;
   children: ReactNode;
@@ -30,7 +30,7 @@ const DetailPage = ({
   title,
   asideContainer,
   className,
-}: DetailPageProps) => {
+}: DetailProps) => {
   return (
     <div className={`flex flex-col w-full px-10 sm:px-20 md:px-32 lg:px-56 xl:px-72 ${className || ''}`}>
       <section className="flex justify-between pt-20 pb-4">

@@ -6,9 +6,10 @@ import { Reservation } from "@/types/Reservation";
 import {
   getReservationsByHotel,
 } from "@/app/api/reservations/actions";
-import { DetailPageProps } from "@/types/DetailPage";
 import { getHotelById } from "@/app/api/hotels/action";
 import ReservationOwnerListItem from "@/components/DetailListItem/Owner";
+
+type ParamsProps = Promise<{ slug: string[] }>;
 
 type ReducedReservations = {
   pending: Reservation[];
@@ -16,13 +17,13 @@ type ReducedReservations = {
   cancelled: Reservation[];
 };
 
-const ReservationsPage = async ({ params }: DetailPageProps) => {
+const ReservationsPage = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-  const { id } = await params;
-  const hotelId = Number(id);
-  const hotel = await getHotelById(hotelId);
+  const { slug }: {slug: string[]} = await params;
+  const hotelId = slug[1];
+  const hotel = await getHotelById(Number(hotelId));
   const reservations = await getReservationsByHotel(hotel);
 
   const { pending, approved, cancelled } =

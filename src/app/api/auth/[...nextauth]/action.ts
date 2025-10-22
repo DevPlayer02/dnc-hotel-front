@@ -1,6 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import api from "@/api";
+
+type LoginResponse = {
+  access_token: string;
+};
+
+type UserResponse = {
+  id: number | string;
+  name?: string;
+  email?: string;
+  avatar?: string | null;
+};
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -15,7 +27,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials) throw new Error("No credentials provided");
 
         try {
-          const { data: loginData } = await api.post("/auth/login", {
+          const { data: loginData } = await api.post<LoginResponse>("/auth/login", {
             email: credentials.email,
             password: credentials.password,
           });
@@ -31,7 +43,7 @@ export const authOptions: NextAuthOptions = {
           );
           const userId = payload?.sub;
 
-          const { data: user } = await api.get(`/users/${userId}`, {
+          const { data: user } = await api.get<UserResponse>(`/users/${userId}`, {
             headers: { Authorization: `Bearer ${access_token}` },
           });
 

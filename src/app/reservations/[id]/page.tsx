@@ -1,17 +1,17 @@
 import { getReservationById } from "@/app/api/reservations/actions";
 import DetailRow from "@/components/DetailListItem/DetailRow";
 import DetailPage from "@/components/DetailPage";
-import Link from "@/components/Link";
 import UserDetail from "@/components/UserDetail/server";
 import { getFormattedStatus } from "@/helpers/format/dictionary/status";
 import { getFormattedDate } from "@/helpers/format/date";
 import { getFormattedPrice } from "@/helpers/format/money";
-import { DetailPageProps } from "@/types/DetailPage";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import BackButton from "./BackButton";
 
-const DetailsReservationPage = async ({ params }: DetailPageProps) => {
+type ParamsProps = Promise<{ slug: string[] }>;
+
+const DetailsReservationPage = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 

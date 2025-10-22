@@ -1,11 +1,12 @@
 import { getReservationById } from "@/app/api/reservations/actions";
 import Link from "@/components/Link";
 import UserDetail from "@/components/UserDetail/server";
-import { DetailPageProps } from "@/types/DetailPage";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-const ReservationRequestPage = async ({ params }: DetailPageProps) => {
+type ParamsProps = Promise<{ slug: string[] }>;
+
+const ReservationRequestPage = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 

@@ -1,19 +1,20 @@
 import { getHotelById } from "@/app/api/hotels/action";
 import HotelForm from "@/components/HotelForm";
 import Link from "@/components/Link";
-import { DetailPageProps } from "@/types/DetailPage";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-const EditHotelPage = async ({ params }: DetailPageProps) => {
+type ParamsProps = Promise<{ slug: string[] }>;
+
+const EditHotelPage = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session) {
     redirect("/login");
   }
 
-  const { id } = await params;
-  const hotelId = Number(id);
-  const hotel = await getHotelById(hotelId);
+  const { slug }: {slug: string[]} = await params;
+  const hotelId = slug[1];
+  const hotel = await getHotelById(Number(hotelId));
 
   return (
     <section className="max-w-96 w-full flex justify-center items-center flex-col py-4 px-6 border border-light-grey-500 rounded-2xl">
