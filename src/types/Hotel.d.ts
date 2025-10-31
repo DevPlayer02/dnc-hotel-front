@@ -16,6 +16,7 @@ export type Hotel = {
 export type HotelPagination = {
     total: number;
     page: number;
+    per_page: number;
     limit: number;
     data: Hotel[];
 }

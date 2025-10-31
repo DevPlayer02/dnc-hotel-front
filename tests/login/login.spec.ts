@@ -5,7 +5,7 @@ test("It should perform authentication successfully.", async ({ page }) => {
 
   await expect(page).toHaveURL("http://localhost:3001/login");
 
-  await page.getByLabel(/e-mail/i).fill("xohackudo@dnc.com");
+  await page.getByLabel(/e-mail/i).fill("teste@teste.com");
   await page.getByLabel(/^password/i).fill("12345");
   await page.getByRole("button", { name: /^login/i }).click();
 
@@ -19,7 +19,7 @@ test("It should keep the user on the login screen if the password is invalid.", 
 
   await expect(page).toHaveURL("http://localhost:3001/login");
 
-  await page.getByLabel(/e-mail/i).fill("xohackudo@dnc.com");
+  await page.getByLabel(/e-mail/i).fill("teste@teste.com");
   await page.getByLabel(/^password/i).fill("passwordincorrect");
   await page.getByRole("button", { name: /^login/i }).click();
 
@@ -31,7 +31,7 @@ test("It should prompt to fill in the required fields.", async ({ page }) => {
 
   await expect(page).toHaveURL("http://localhost:3001/login");
 
-  await page.getByLabel(/e-mail/i).fill("xohackudo@dnc.com");
+  await page.getByLabel(/e-mail/i).fill("teste@teste.com");
   await page.getByRole("button", { name: /^login/i }).click();
 
   await expect(page).toHaveURL("http://localhost:3001/login");

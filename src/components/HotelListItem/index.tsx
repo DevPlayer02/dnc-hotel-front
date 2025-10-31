@@ -6,9 +6,10 @@ import { getFormattedPrice } from "@/helpers/format/money";
 
 type HotelListItemProps = {
   hotel: Hotel;
+  className?: string;
 };
 
-const HotelListItem = ({ hotel }: HotelListItemProps) => {    
+const HotelListItem = ({ hotel, className }: HotelListItemProps) => {    
   const base = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
   const filename = hotel.image;
   const srcUrl = filename
@@ -18,14 +19,14 @@ const HotelListItem = ({ hotel }: HotelListItemProps) => {
   return (
     <Link
       href={`/my-properties/${hotel.id}/reservations`}
-      className="flex w-full mt-5 md:mt-0"
+      className={`flex w-full mt-5 md:mt-0 ${className}`}
     >
       <CustomImage
         src={srcUrl ?? "/no-hotel.jpg"}
         alt={`Hotel's photo ${hotel.name}`}
         width={300}
         height={300}
-        className="rounded-lg w-32 h-32 object-cover"
+        className="border border-black shadow-2xl rounded-lg w-32 h-32 object-cover "
       />
       <div className="w-full flex flex-col justify-around ml-4">
         <b>{hotel.name}</b>

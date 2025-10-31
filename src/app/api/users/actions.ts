@@ -3,7 +3,7 @@
 import axios from "@/api";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../auth/[...nextauth]/action";
+import { authOptions } from "../../../lib/authOptions";
 import { decryptToken } from "@/helpers/decryptToken";
 import { getReservationsByUser } from "../reservations/actions";
 import { ActionResponse } from "@/types/api";
@@ -44,7 +44,7 @@ export async function getProfile(): Promise<User> {
 
 export async function updateProfile(prevState: ActionResponse | undefined, formData: FormData): Promise<ActionResponse>  {
   const session = await getServerSession(authOptions);
-const accessToken = (session?.user as { access_token?: string })?.access_token;
+  const accessToken = (session?.user as { access_token?: string })?.access_token;
 
   if (!accessToken) redirect("/login");
 

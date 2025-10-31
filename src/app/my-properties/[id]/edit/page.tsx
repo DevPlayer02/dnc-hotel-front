@@ -4,7 +4,7 @@ import Link from "@/components/Link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-type ParamsProps = Promise<{ slug: string[] }>;
+type ParamsProps = Promise<{ id: string }>;
 
 const EditHotelPage = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
@@ -12,8 +12,8 @@ const EditHotelPage = async ({ params }: { params: ParamsProps}) => {
     redirect("/login");
   }
 
-  const { slug }: {slug: string[]} = await params;
-  const hotelId = slug[1];
+  const { id } = await params;
+  const hotelId = Number(id);
   const hotel = await getHotelById(Number(hotelId));
 
   return (

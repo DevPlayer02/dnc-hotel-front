@@ -2,17 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    domains: ["dnc-hotel-production.up.railway.app"],
     remotePatterns: [
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "dnc-hotel-production.up.railway.app",
-        port: "3000",
         pathname: "/uploads-hotel/**",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "dnc-hotel-production.up.railway.app",
-        port: "3000",
         pathname: "/uploads/**",
       },
     ],

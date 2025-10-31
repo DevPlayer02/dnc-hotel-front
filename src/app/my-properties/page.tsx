@@ -18,15 +18,15 @@ export default async function MyProperties() {
       <section className="w-full my-4">
         <Link href="/profile"> Back </Link>
       </section>
-      <div className="p-10 px-20 mt-6 border border-snow-white rounded-4xl bg-snow-white">
-        <section className="flex justify-center mb-10">
+      <div className="p-10 px-20 mt-6 border border-snow-white rounded-4xl bg-blue-500">
+        <section className="flex justify-end mb-10">
           <Link href="/my-properties/register">
-            <Button> + New properties </Button>
+            <Button appearance="secondary"> + New properties </Button>
           </Link>
         </section>
-        <section className="grid grid-cols-1 md:gap-20 sm:grid-cols-2 mt-4">
+        <section className="grid grid-cols-1 md:gap-20 sm:grid-cols-2 mt-0">
           {hotels.map((hotel) => (
-            <HotelListItem hotel={hotel} key={hotel.id} />
+            <HotelListItem hotel={hotel} key={hotel.id} className="shadow-2xl border border-white bg-snow-white rounded-lg p-4"/>
           ))}
         </section>
       </div>

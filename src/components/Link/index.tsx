@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 type LinkProps = NextLinkProps & {
   children: ReactNode;
   className?: string;
+  tabIndex?: number;
 };
 
 const Link = ({ className, ...props }: LinkProps) => {

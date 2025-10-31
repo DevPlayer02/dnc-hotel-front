@@ -1,11 +1,10 @@
-import Link from "../Link";
+import Link from "@/components/Link";
 import { getPaginationRange } from "./helper";
 
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
   destination: string;
-  pages?: number[]; 
 };
 
 const pagesStyles =
@@ -18,7 +17,7 @@ const disabledStyles =
   "pointer-events-none aria-disabled:bg-slate-100 aria-disabled:text-slate-400 aria-disabled:cursor-not-allowed";
 
 const Pagination = ({
-  currentPage = 1,
+  currentPage,
   totalPages,
   destination,
 }: PaginationProps) => {
@@ -43,7 +42,7 @@ const Pagination = ({
             return (
               <li key={page}>
                 <Link
-                  href={{ pathname: destination, query: { page } }}
+                  href={{ pathname: destination, query: { page: String(page) } }}
                   className={styles}
                 >
                   {page as number}

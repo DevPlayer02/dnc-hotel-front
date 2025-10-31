@@ -15,7 +15,7 @@ test("It should be able to make a reservation successfully.", async ({
 
   await expect(page).toHaveURL("http://localhost:3001/login");
 
-  await page.getByLabel(/e-mail/i).fill("fulano@dnc.com");
+  await page.getByLabel(/e-mail/i).fill("teste@teste.com");
   await page.getByLabel(/^password/i).fill("12345");
   await page.getByRole("button", { name: /^login/i }).click();
 

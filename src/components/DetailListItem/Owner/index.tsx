@@ -31,7 +31,7 @@ const ReservationOwnerListItem = ({
 
     try {
       await updateReservationStatus(reservation.id, status);
-      await router.push(`/reservations/${reservation.id}`);
+      router.push(`/my-properties/${reservation.id}/reservations`);
     } catch (error) {
       console.error("Error updating reservation status:", error);
     } finally {

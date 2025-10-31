@@ -8,10 +8,11 @@ import TextField from "@/components/Form/TextField";
 import { getFormattedPrice } from "@/helpers/format/money";
 import { Hotel } from "@/types/Hotel";
 import { ChangeEvent, useState } from "react";
-import { useActionState } from "react"; 
+import { useActionState } from "react";
 
 type HotelBookingFormProps = {
   hotel: Hotel;
+  isOwner?: boolean;
 };
 
 const getNightsInHotel = (checkin: string | null, checkout: string | null) => {

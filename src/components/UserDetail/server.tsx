@@ -1,6 +1,5 @@
 "use client";
 import CustomImage from "../CustomImage";
-import { normalizeImageSrc } from "@/helpers/format/image";
 import { User } from "@/types/User";
 
 type UserDetailProps = {
@@ -8,13 +7,10 @@ type UserDetailProps = {
 };
 
 const UserDetail = ({ user }: UserDetailProps) => {
-  const rawAvatarSrc = user?.avatar ?? "/default-avatar.png";
-  const normalizedSrc = normalizeImageSrc(rawAvatarSrc);
-  
   return (
     <div className="w-full p-4 border border-gray-200 shadow-lg rounded-xl mt-4 flex items-center">
       <CustomImage
-        src={normalizedSrc}
+        src={user.avatar}
         alt={`Host's photo ${user?.name}`}
         width={56}
         height={56}

@@ -6,16 +6,15 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import UserDetail from "@/components/UserDetail/server";
 
-type ParamsProps = Promise<{ slug: string[] }>;
+type ParamsProps = Promise<{ id: string }>;
 
 const HotelDetail = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-  const { slug }: {slug: string[]} = await params;
-  const hotelId = slug[1];
+  const { id } = await params;
+  const hotelId = Number(id);
   const hotel = await getHotelDetail(Number(hotelId));
-  console.log(hotel);
 
   return (
     <DetailPage

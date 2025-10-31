@@ -1,5 +1,5 @@
 export type ActionResponse = {
-  error: boolean;
+  error?: boolean;
   message: string;
   user?: User;
 };

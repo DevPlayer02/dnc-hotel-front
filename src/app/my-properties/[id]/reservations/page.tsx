@@ -9,7 +9,7 @@ import {
 import { getHotelById } from "@/app/api/hotels/action";
 import ReservationOwnerListItem from "@/components/DetailListItem/Owner";
 
-type ParamsProps = Promise<{ slug: string[] }>;
+type ParamsProps = Promise<{ id: string }>;
 
 type ReducedReservations = {
   pending: Reservation[];
@@ -21,8 +21,8 @@ const ReservationsPage = async ({ params }: { params: ParamsProps}) => {
   const session = await getServerSession();
   if (!session?.user) redirect("/login");
 
-  const { slug }: {slug: string[]} = await params;
-  const hotelId = slug[1];
+  const { id } = await params;
+  const hotelId = Number(id);
   const hotel = await getHotelById(Number(hotelId));
   const reservations = await getReservationsByHotel(hotel);
 

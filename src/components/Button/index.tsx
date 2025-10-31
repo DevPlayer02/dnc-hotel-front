@@ -11,7 +11,7 @@ const getAppearanceStyle = (appearance: AppearanceType) =>
     primary:
       "bg-main-brand-blue-500 text-white hover:bg-main-brand-blue-600 active:bg-main-brand-blue-700 focus:outline-none focus:ring focus:ring-main-brand-blue-300",
     secondary:
-    "bg-none border-none text-main-brand-blue-500 hover:bg-snow-white active:bg-snow-white focus:outline-none focus:ring focus:ring-main-brand-blue-300",
+    "bg-snow-white active:bg-snow-white focus:outline-none focus:ring focus:ring-main-brand-blue-300",
     danger:
     "bg-none border-none text-red-500 hover:bg-snow-white active:bg-snow-white focus:outline-none focus:ring focus:ring-red-300",
   }[appearance]);

@@ -3,7 +3,7 @@
 import axios from "@/api";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/action";
+import { authOptions } from "@/lib/authOptions";
 import { Reservation, ReservationStatus } from "@/types/Reservation";
 import { getHotelDetail } from "../hotels/action";
 import { Hotel } from "@/types/Hotel";

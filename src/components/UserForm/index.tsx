@@ -7,10 +7,10 @@ import TextField from "../Form/TextField";
 import RadioGroup from "../Form/RadioGroup";
 import Button from "../Button";
 import { useActionState } from "react";
-import { signup } from "@/app/api/auth/sinup/action";
 import { User } from "@/types/User";
 import { updateProfile } from "@/app/api/users/actions";
 import { ActionResponse } from "@/types/api";
+import { signup } from "@/app/api/auth/sinup/action";
 
 const initialState = { error: false, message: "" };
 
@@ -19,7 +19,7 @@ type UserFormProps = {
 };
 
 const UserForm = ({ user }: UserFormProps) => {
-   const action = (user ? updateProfile : signup) as (state: ActionResponse | undefined, payload: FormData) => Promise<ActionResponse>;
+  const action = (user ? updateProfile : signup) as (state: ActionResponse | undefined, payload: FormData) => Promise<ActionResponse>;
   const [state, formAction] = useActionState(action, initialState);
 
   const base = (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, "");
@@ -28,7 +28,6 @@ const UserForm = ({ user }: UserFormProps) => {
     ? `${base}/uploads/${encodeURIComponent(filename)}`
     : "/default-profile.jpg";
   
-  console.log({user})
   return (
     <>
       {state.error && <Alert type="danger">{state.message}</Alert>}
