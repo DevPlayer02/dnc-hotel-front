@@ -5,33 +5,29 @@ import { getHotels } from "./api/hotels/action";
 import { getFormattedPrice } from "@/helpers/format/money";
 import Pagination from "@/components/Pagination";
 import CustomImage from "@/components/CustomImage";
+import { Hotel, HotelPagination } from "@/types/Hotel";
 
-type SearchParams = {
-  page?: string;
-  query?: string;
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Home(props: any) {
+  const { searchParams } = props ?? {};
 
-type HomeProps = {
-  searchParams: SearchParams;
-};
+  const resolvedSearchParams = (await Promise.resolve(
+    searchParams ?? {}
+  )) as Record<string, string | string[] | undefined>;
 
-const LIMIT = 8;
+  const pageParam = resolvedSearchParams.page;
+  const currentPage = Number(pageParam ?? 1);
 
-export default async function Home({ searchParams }: HomeProps) {
   const session = await getServerSession();
   if (!session) {
     redirect("/login");
   }
 
-  const { page: pageParam, query: queryParam } = await searchParams;
-  const currentPage = Number(pageParam ?? 1);
+  const result = (await getHotels(currentPage, 8)) as HotelPagination;
 
-  const {
-    data: hotels,
-    per_page,
-    page,
-    total,
-  } = await getHotels(currentPage, LIMIT);
+  const hotels: Hotel[] = result?.data ?? [];
+  const { per_page, total } = result;
+  const totalPages = Math.max(1, Math.ceil(total / per_page));
 
   return (
     <div>
@@ -80,7 +76,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <section className="flex justify-center mt-4 mb-8">
         <Pagination
           currentPage={currentPage}
-          totalPages={Math.ceil(total / per_page)}
+          totalPages={totalPages}
           destination="/"
         />
       </section>
